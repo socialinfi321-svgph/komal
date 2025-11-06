@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Komal Caterers</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #fff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .title {
+      font-size: 42px;
+      font-weight: 700;
+      color: #d32f2f;
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #e3f2fd, #fff);
+    }
+
+    .subtitle {
+      font-size: 18px;
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .review-box {
+      width: 80%;
+      max-width: 700px;
+      background: #f7f7f7;
+      border-radius: 30px;
+      padding: 24px;
+      font-size: 17px;
+      color: #333;
+      line-height: 1.6;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: left;
+      position: relative;
+      transition: 0.4s ease;
+    }
+
+    .copy-btn {
+      position: absolute;
+      bottom: -16px;
+      left: 30px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: #0d47a1;
+    }
+
+    .google-btn {
+      display: inline-block;
+      margin-top: 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 12px 18px;
+      background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
+      background-size: 300% 300%;
+      animation: colorShift 6s infinite alternate;
+    }
+
+    @keyframes colorShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .star-section {
+      margin-top: 10px;
+      text-align: center;
+      color: #000;
+    }
+
+    .stars {
+      font-size: 22px;
+      letter-spacing: 3px;
+    }
+
+    .thanks {
+      margin-top: 40px;
+      font-size: 22px;
+      font-family: 'Brush Script MT', cursive;
+      color: #111;
+      text-align: center;
+    }
+
+    .policy {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">Komal Caterers</div>
+  <div class="subtitle">To give review copy the text</div>
+
+  <div class="review-box" id="reviewBox">
+    <p id="reviewText">Loading review...</p>
+    <button class="copy-btn" id="copyBtn">Copy Text</button>
+  </div>
+
+  <a href="https://search.google.com/local/writereview?placeid=ChIJ704Msm_rwjsR3gIxUmMibJI" target="_blank" rel="noopener" class="google-btn">Google Reviews</a>
+
+  <div class="star-section">
+    <div class="stars">⭐⭐⭐⭐⭐</div>
+  </div>
+
+  <div class="thanks">Thanks for supporting us!</div>
+
+  <div class="policy">
+    <p>All reviews are voluntary and for feedback purposes only.</p>
+    <p>By using this page, you agree that reviews reflect personal experience only.</p>
+  </div>
+
+  <script type="module">
+    // Import Supabase client
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const SUPABASE_URL = 'https://htyfzhrjrcdhikcdvgtw.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0eWZ6aHJqcmNkaGlrY2R2Z3R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0MjQwMTQsImV4cCI6MjA3ODAwMDAxNH0.c64AeAB-_D1sn7sZQm70H6e67OQK9MZRFt_kbZEQKR0';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const reviewText = document.getElementById('reviewText');
+    const copyBtn = document.getElementById('copyBtn');
+
+    async function fetchReview() {
+      try {
+        // Step 1: Get first unused review (order by id)
+        const { data, error } = await supabase
+          .from('reviews')
+          .select('*')
+          .eq('is_used', false)
+          .order('id', { ascending: true })
+          .limit(1);
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          reviewText.innerText = "No more reviews available.";
+          copyBtn.style.display = "none";
+          return;
+        }
+
+        const review = data[0];
+        reviewText.innerText = review.review_text;
+
+        // Step 2: Mark review as used
+        await supabase
+          .from('reviews')
+          .update({ is_used: true })
+          .eq('id', review.id);
+
+        // Step 3: Copy function
+        copyBtn.addEventListener("click", async function() {
+          try {
+            await navigator.clipboard.writeText(review.review_text);
+            this.innerText = "Copied ✓";
+            setTimeout(() => this.innerText = "Copy Text", 2000);
+          } catch (err) {
+            alert("Copy failed — please copy manually.");
+          }
+        });
+
+      } catch (err) {
+        console.error(err);
+        reviewText.innerText = "Error fetching review.";
+      }
+    }
+
+    fetchReview();
+  </script>
+</body>
+</html>
