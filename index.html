@@ -6,39 +6,26 @@
   <title>Komal Caterers</title>
   <style>
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #e3f2fd, #fff);
-      margin: 0;
-      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      margin: 0;
     }
 
-    .title {
-      font-size: 42px;
-      font-weight: 700;
+    h1 {
       color: #d32f2f;
       text-align: center;
-      margin-top: 30px;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #e3f2fd, #fff);
-    }
-
-    .subtitle {
-      font-size: 18px;
-      text-align: center;
-      color: #333;
-      margin-bottom: 30px;
     }
 
     .review-box {
       width: 80%;
       max-width: 700px;
       background: #f7f7f7;
-      border-radius: 30px;
+      border-radius: 20px;
       padding: 24px;
       font-size: 17px;
       color: #333;
@@ -47,12 +34,10 @@
       text-align: left;
       position: relative;
       transition: 0.4s ease;
+      margin-top: 20px;
     }
 
     .copy-btn {
-      position: absolute;
-      bottom: -16px;
-      left: 30px;
       background: #1976d2;
       color: white;
       border: none;
@@ -60,56 +45,12 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      margin-top: 10px;
       transition: 0.3s;
     }
 
     .copy-btn:hover {
       background: #0d47a1;
-    }
-
-    .google-btn {
-      display: inline-block;
-      margin-top: 40px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 600;
-      padding: 12px 18px;
-      background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
-      background-size: 300% 300%;
-      animation: colorShift 6s infinite alternate;
-    }
-
-    @keyframes colorShift {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }
-
-    .star-section {
-      margin-top: 10px;
-      text-align: center;
-      color: #000;
-    }
-
-    .stars {
-      font-size: 22px;
-      letter-spacing: 3px;
-    }
-
-    .thanks {
-      margin-top: 40px;
-      font-size: 22px;
-      font-family: 'Brush Script MT', cursive;
-      color: #111;
-      text-align: center;
-    }
-
-    .policy {
-      font-size: 12px;
-      color: #777;
-      text-align: center;
-      margin-top: 20px;
-      line-height: 1.4;
     }
 
     .loading-spinner {
@@ -119,7 +60,7 @@
       width: 40px;
       height: 40px;
       animation: spin 1s linear infinite;
-      margin: 0 auto;
+      margin: 40px auto;
     }
 
     @keyframes spin {
@@ -129,31 +70,23 @@
   </style>
 </head>
 <body>
-  <div class="title">Komal Caterers</div>
-  <div class="subtitle">To give review copy the text</div>
+  <h1>Komal Caterers Reviews</h1>
 
   <div class="review-box" id="reviewBox">
     <div class="loading-spinner"></div>
-    <p id="reviewText" style="display: none;">Loading review...</p>
-    <button class="copy-btn" id="copyBtn" style="display: none;">Copy Text</button>
+    <p id="reviewText" style="display:none;">Loading...</p>
+    <button class="copy-btn" id="copyBtn" style="display:none;">Copy Text</button>
   </div>
 
-  <a href="https://search.google.com/local/writereview?placeid=ChIJ704Msm_rwjsR3gIxUmMibJI" target="_blank" rel="noopener" class="google-btn">Google Reviews</a>
-
-  <div class="star-section">
-    <div class="stars">⭐⭐⭐⭐⭐</div>
-  </div>
-
-  <div class="thanks">Thanks for supporting us!</div>
-
-  <div class="policy">
-    <p>All reviews are voluntary and for feedback purposes only.</p>
-    <p>By using this page, you agree that reviews reflect personal experience only.</p>
-  </div>
+  <a href="https://search.google.com/local/writereview?placeid=ChIJ704Msm_rwjsR3gIxUmMibJI"
+     target="_blank"
+     style="margin-top: 25px; display: inline-block; background: #4285F4; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+     Give Google Review
+  </a>
 
   <script>
-    // Google Apps Script API URL
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxAb0PxALcHIfiIK15jeOTLj0g4SalflbtvH0MAGUVEoiiD8VGU6VEkynUNuW6laQas/exec';
+    // ✅ Aapka Google Apps Script URL
+    const API_URL = "https://script.google.com/macros/s/AKfycbzr5EWRjFeve-DNS8aLgDFkeVA34vLyjOffc5sW7Fbiaiv4O5I9Wg9uHV1wB1lnz5Yd/exec";
 
     const reviewText = document.getElementById('reviewText');
     const copyBtn = document.getElementById('copyBtn');
@@ -161,65 +94,48 @@
 
     async function fetchReview() {
       try {
-        // Call Google Apps Script API
         const response = await fetch(API_URL);
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch review');
-        }
-
         const data = await response.json();
 
-        // Hide loading spinner
         reviewBox.querySelector('.loading-spinner').style.display = 'none';
         reviewText.style.display = 'block';
+
+        if (!data.success) {
+          reviewText.innerText = data.message || "No review found.";
+          return;
+        }
+
+        // show review text
+        reviewText.innerText = data.review_text;
         copyBtn.style.display = 'block';
 
-        if (data.error) {
-          reviewText.innerText = data.error;
-          copyBtn.style.display = 'none';
-          return;
-        }
-
-        if (!data.review) {
-          reviewText.innerText = "No more reviews available.";
-          copyBtn.style.display = 'none';
-          return;
-        }
-
-        // Display the review
-        reviewText.innerText = data.review;
-
-        // Copy functionality
-        copyBtn.addEventListener("click", async function() {
+        // copy button
+        copyBtn.onclick = async () => {
           try {
-            await navigator.clipboard.writeText(data.review);
-            this.innerText = "Copied ✓";
-            setTimeout(() => this.innerText = "Copy Text", 2000);
-          } catch (err) {
-            // Fallback for older browsers
+            await navigator.clipboard.writeText(data.review_text);
+            copyBtn.innerText = "Copied ✓";
+            setTimeout(() => copyBtn.innerText = "Copy Text", 2000);
+          } catch {
             const textArea = document.createElement("textarea");
-            textArea.value = data.review;
+            textArea.value = data.review_text;
             document.body.appendChild(textArea);
             textArea.select();
-            document.execCommand('copy');
+            document.execCommand("copy");
             document.body.removeChild(textArea);
-            
-            this.innerText = "Copied ✓";
-            setTimeout(() => this.innerText = "Copy Text", 2000);
+            copyBtn.innerText = "Copied ✓";
+            setTimeout(() => copyBtn.innerText = "Copy Text", 2000);
           }
-        });
+        };
 
       } catch (err) {
-        console.error('Error:', err);
+        console.error(err);
         reviewBox.querySelector('.loading-spinner').style.display = 'none';
         reviewText.style.display = 'block';
-        reviewText.innerText = "Error loading review. Please refresh the page.";
+        reviewText.innerText = "Error loading review. Please refresh.";
       }
     }
 
-    // Fetch review when page loads
     fetchReview();
   </script>
 </body>
-</html> 
+</html>
