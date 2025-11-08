@@ -111,6 +111,21 @@
       margin-top: 20px;
       line-height: 1.4;
     }
+
+    .loading-spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #1976d2;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -118,8 +133,9 @@
   <div class="subtitle">To give review copy the text</div>
 
   <div class="review-box" id="reviewBox">
-    <p id="reviewText">Loading review...</p>
-    <button class="copy-btn" id="copyBtn">Copy Text</button>
+    <div class="loading-spinner"></div>
+    <p id="reviewText" style="display: none;">Loading review...</p>
+    <button class="copy-btn" id="copyBtn" style="display: none;">Copy Text</button>
   </div>
 
   <a href="https://search.google.com/local/writereview?placeid=ChIJ704Msm_rwjsR3gIxUmMibJI" target="_blank" rel="noopener" class="google-btn">Google Reviews</a>
@@ -135,63 +151,75 @@
     <p>By using this page, you agree that reviews reflect personal experience only.</p>
   </div>
 
-  <script type="module">
-    // Import Supabase client
-    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-
-    const SUPABASE_URL = 'https://htyfzhrjrcdhikcdvgtw.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0eWZ6aHJqcmNkaGlrY2R2Z3R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0MjQwMTQsImV4cCI6MjA3ODAwMDAxNH0.c64AeAB-_D1sn7sZQm70H6e67OQK9MZRFt_kbZEQKR0';
-
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  <script>
+    // Google Apps Script API URL
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxAb0PxALcHIfiIK15jeOTLj0g4SalflbtvH0MAGUVEoiiD8VGU6VEkynUNuW6laQas/exec';
 
     const reviewText = document.getElementById('reviewText');
     const copyBtn = document.getElementById('copyBtn');
+    const reviewBox = document.getElementById('reviewBox');
 
     async function fetchReview() {
       try {
-        // Step 1: Get first unused review (order by id)
-        const { data, error } = await supabase
-          .from('reviews')
-          .select('*')
-          .eq('is_used', false)
-          .order('id', { ascending: true })
-          .limit(1);
+        // Call Google Apps Script API
+        const response = await fetch(API_URL);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch review');
+        }
 
-        if (error) throw error;
+        const data = await response.json();
 
-        if (!data || data.length === 0) {
-          reviewText.innerText = "No more reviews available.";
-          copyBtn.style.display = "none";
+        // Hide loading spinner
+        reviewBox.querySelector('.loading-spinner').style.display = 'none';
+        reviewText.style.display = 'block';
+        copyBtn.style.display = 'block';
+
+        if (data.error) {
+          reviewText.innerText = data.error;
+          copyBtn.style.display = 'none';
           return;
         }
 
-        const review = data[0];
-        reviewText.innerText = review.review_text;
+        if (!data.review) {
+          reviewText.innerText = "No more reviews available.";
+          copyBtn.style.display = 'none';
+          return;
+        }
 
-        // Step 2: Mark review as used
-        await supabase
-          .from('reviews')
-          .update({ is_used: true })
-          .eq('id', review.id);
+        // Display the review
+        reviewText.innerText = data.review;
 
-        // Step 3: Copy function
+        // Copy functionality
         copyBtn.addEventListener("click", async function() {
           try {
-            await navigator.clipboard.writeText(review.review_text);
+            await navigator.clipboard.writeText(data.review);
             this.innerText = "Copied ✓";
             setTimeout(() => this.innerText = "Copy Text", 2000);
           } catch (err) {
-            alert("Copy failed — please copy manually.");
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = data.review;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            this.innerText = "Copied ✓";
+            setTimeout(() => this.innerText = "Copy Text", 2000);
           }
         });
 
       } catch (err) {
-        console.error(err);
-        reviewText.innerText = "Error fetching review.";
+        console.error('Error:', err);
+        reviewBox.querySelector('.loading-spinner').style.display = 'none';
+        reviewText.style.display = 'block';
+        reviewText.innerText = "Error loading review. Please refresh the page.";
       }
     }
 
+    // Fetch review when page loads
     fetchReview();
   </script>
 </body>
-</html>
+</html> 
