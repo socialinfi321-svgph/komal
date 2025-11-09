@@ -3,10 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Komal Caterers Reviews</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Saira:wght@400;700&display=swap" rel="stylesheet">
-
+ 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +15,7 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background-image: url('https://github.com/socialinfi321-svgph/komal/raw/main/1762664728696.jpg');
+      background-image: url('https://raw.githubusercontent.com/socialinfi321-svgph/komal/main/1762679940327.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -144,11 +141,11 @@
   <div class="subtitle">To give review, copy the text below 👇</div>
 
   <div class="review-box" id="reviewBox">
-    <p id="reviewText"></p>
+    <p id="reviewText">Loading review...</p>
     <button class="copy-btn" id="copyBtn">Copy Text</button>
   </div>
 
-  <a href="https://search.google.com/local/writereview?placeid=ChIJ704Msm_rwjsR3gIxUmMibJI" target="_blank" rel="noopener" class="google-btn">
+  <a href="https://search.google.com/local/writereview?placeid=ChIJR-6VZhHrwjsRcvTRt4qX00Y" target="_blank" rel="noopener" class="google-btn">
     Google Reviews
   </a>
 
@@ -165,27 +162,63 @@
     <p>By using this page, you agree that reviews reflect personal experience only.</p>
   </div>
 
-  <script>
-    const reviews = [
-      "I went to citykart made made our park magiiceall park event! The food fresh delcious and beautifull presnted. Highly prathing for any gathning!",
-      "Komal Caterers is simply outstanding! The entire staff was so professional and attentive.",
-      "The food was genuinely delicious! Every dish was flavourful and fresh.",
-      "Hosting an event with Komal Caterers was the best decision. Professional execution!",
-      "A delightful experience! Perfect service, amazing setup, and delicious food."
-    ];
+  <script type="module">
+    // Import Supabase client
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-    const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
-    document.getElementById("reviewText").innerText = randomReview;
+    const SUPABASE_URL = 'https://htyfzhrjrcdhikcdvgtw.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0eWZ6aHJqcmNkaGlrY2R2Z3R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0MjQwMTQsImV4cCI6MjA3ODAwMDAxNH0.c64AeAB-_D1sn7sZQm70H6e67OQK9MZRFt_kbZEQKR0';
 
-    document.getElementById("copyBtn").addEventListener("click", async function() {
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const reviewText = document.getElementById('reviewText');
+    const copyBtn = document.getElementById('copyBtn');
+
+    async function fetchReview() {
       try {
-        await navigator.clipboard.writeText(randomReview);
-        this.innerText = "Copied ✓";
-        setTimeout(() => this.innerText = "Copy Text", 2000);
+        // Step 1: Get first unused review (order by id)
+        const { data, error } = await supabase
+          .from('reviews')
+          .select('*')
+          .eq('is_used', false)
+          .order('id', { ascending: true })
+          .limit(1);
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          reviewText.innerText = "No more reviews available.";
+          copyBtn.style.display = "none";
+          return;
+        }
+
+        const review = data[0];
+        reviewText.innerText = review.review_text;
+
+        // Step 2: Mark review as used
+        await supabase
+          .from('reviews')
+          .update({ is_used: true })
+          .eq('id', review.id);
+
+        // Step 3: Copy function
+        copyBtn.addEventListener("click", async function() {
+          try {
+            await navigator.clipboard.writeText(review.review_text);
+            this.innerText = "Copied ✓";
+            setTimeout(() => this.innerText = "Copy Text", 2000);
+          } catch (err) {
+            alert("Copy failed — please copy manually.");
+          }
+        });
+
       } catch (err) {
-        alert("Copy failed — please copy manually.");
+        console.error(err);
+        reviewText.innerText = "Error fetching review.";
       }
-    });
+    }
+
+    fetchReview();
   </script>
 </body>
 </html>
