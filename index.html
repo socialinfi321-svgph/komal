@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,38 +24,41 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       background-image: url('https://github.com/socialinfi321-svgph/komal/raw/main/1762664728696.jpg');
-      background-size: cover;        /* Cover entire screen */
-      background-position: center;   /* Center the image */
-      background-repeat: no-repeat;  /* Do not repeat */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start; /* Top start */
       text-align: center;
       position: relative;
+      padding-top: 40px; /* Push all content down by 40px */
     }
 
     .subtitle {
       font-size: 15px;
-      color: #fff; /* White text for visibility */
+      color: black;
+      font-weight: bold;
       margin-bottom: 25px;
       z-index: 10;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
     .review-box {
       width: 95%;
       max-width: 700px;
-      background: rgba(247, 247, 247, 0.9); /* Semi-transparent */
+      background: rgba(247, 247, 247, 0.9);
       border-radius: 30px;
       padding: 24px;
       font-size: 17px;
-      color: #333;
+      color: black;
+      font-weight: bold;
       line-height: 1.6;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       text-align: left;
       position: relative;
       z-index: 10;
+      margin-bottom: 40px; /* Add spacing below */
     }
 
     .copy-btn {
@@ -67,7 +71,7 @@
       padding: 8px 14px;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: bold;
       transition: 0.3s;
     }
 
@@ -80,13 +84,14 @@
       margin-top: 40px;
       border-radius: 8px;
       text-decoration: none;
-      color: #fff;
-      font-weight: 600;
+      color: black;
+      font-weight: bold;
       padding: 12px 18px;
       background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
       background-size: 500% 500%;
       animation: colorShift 6s infinite alternate;
       z-index: 10;
+      margin-bottom: 40px;
     }
 
     @keyframes colorShift {
@@ -96,9 +101,10 @@
 
     .star-section {
       margin-top: 0px;
-      color: #fff;
+      color: black;
+      font-weight: bold;
       z-index: 10;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      margin-bottom: 40px;
     }
 
     .star-section small {
@@ -117,18 +123,20 @@
       margin-top: 20px;
       font-size: 28px;
       font-family: 'Brush Script MT', cursive;
-      color: #fff;
+      color: black;
+      font-weight: bold;
       z-index: 10;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      margin-bottom: 40px;
     }
 
     .policy {
       font-size: 12px;
-      color: #fff;
+      color: black;
+      font-weight: bold;
       margin-top: 35px;
       line-height: 1.4;
       z-index: 10;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      margin-bottom: 40px;
     }
 
     /* Park Silhouette (Fixed Background) */
@@ -153,8 +161,6 @@
   </style>
 </head>
 <body>
-  <!-- Title removed -->
-
   <div class="subtitle">To give review, copy the text below 👇</div>
 
   <div class="review-box" id="reviewBox">
