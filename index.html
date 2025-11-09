@@ -1,11 +1,11 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Komal Caterers Reviews</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Saira:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,14 +27,14 @@
       align-items: center;
       justify-content: flex-start;
       text-align: center;
-      padding-top: 320px;
+      padding-top: 197px;
     }
 
     .subtitle {
       font-size: 14px;
       color: #333;
       margin-bottom: 15px;
-      font-weight: 500;
+      font-weight: 700;
     }
 
     .review-box {
@@ -43,7 +43,9 @@
       background: rgba(255, 255, 255, 0.75);
       border-radius: 25px;
       padding: 20px 24px;
-      font-size: 16px;
+      font-size: 15px;
+      font-family: 'Saira', Arial, Helvetica, sans-serif;
+      font-weight: 800;
       color: #333;
       line-height: 1.5;
       box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -59,7 +61,7 @@
       background: #1976d2;
       color: white;
       border: none;
-      padding: 7px 16px;
+      padding: 3px 8px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
@@ -83,8 +85,8 @@
       padding: 11px 20px;
       background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
       background-size: 500% 500%;
-      animation: colorShift 6s infinite alternate;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      animation: colorShift 2s infinite alternate;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25), 0 0 8px rgba(66, 133, 244, 0.3);
     }
 
     @keyframes colorShift {
@@ -93,35 +95,47 @@
     }
 
     .star-section {
-      margin-top: 15px;
-      color: #333;
+      margin-top: 40px;
+      text-align: center;
+      color: #000;
     }
 
-    .star-section small {
+    .star-section .top-text {
       display: block;
-      font-size: 11px;
-      margin-top: 8px;
-      color: #555;
+      font-size: 10px;
+      margin-bottom: 2px;
+      color: #000;
+      font-weight: 500;
     }
 
     .stars {
-      font-size: 26px;
-      letter-spacing: 4px;
-      margin-top: 8px;
+      font-size: 22px;
+      letter-spacing: 3px;
+      margin: 0;
+    }
+
+    .star-section .bottom-text {
+      display: block;
+      font-size: 10px;
+      margin-top: 2px;
+      color: #000;
+      font-weight: 500;
     }
 
     .thanks {
-      margin-top: 15px;
+      margin-top: 30px;
       font-size: 22px;
-      font-family: 'Pacifico', cursive;
-      color: #2c5f2d;
+      font-family: 'Brush Script MT', cursive;
+      color: #111;
+      text-align: center;
     }
 
     .policy {
-      font-size: 10px;
-      color: #555;
-      margin-top: 20px;
-      line-height: 1.3;
+      font-size: 12px;
+      color: #3b2121;
+      text-align: center;
+      margin-top: 3px;
+      line-height: 1.4;
       max-width: 650px;
     }
   </style>
@@ -139,15 +153,15 @@
   </a>
 
   <div class="star-section">
-    <small>like only give</small>
+    <span class="top-text">Only give</span>
     <div class="stars">⭐⭐⭐⭐⭐</div>
-    <small>Leave your valuable feedback!</small>
+    <span class="bottom-text">May your day not be good but great</span>
   </div>
 
-  <div class="thanks">Thanks you choosing Komal Caterers!</div>
+  <div class="thanks">Thanks for supporting</div>
 
   <div class="policy">
-    <p>All reviews are voluntary and for feedback purposes only.</p>
+    <p>All reviews are voluntary, and for feedback purposes only.</p>
     <p>By using this page, you agree that reviews reflect personal experience only.</p>
   </div>
 
@@ -175,5 +189,3 @@
   </script>
 </body>
 </html>
-
-
