@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,16 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --grass: #689F38;
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
       height: 100%;
       width: 100%;
-      overflow: hidden; /* ❌ No scroll */
+      overflow: hidden;
     }
 
     body {
@@ -30,49 +25,47 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start; /* Top start */
+      justify-content: flex-start;
       text-align: center;
-      position: relative;
-      padding-top: 40px; /* Push all content down by 40px */
+      padding-top: 320px;
     }
 
     .subtitle {
-      font-size: 15px;
-      color: black;
-      font-weight: bold;
-      margin-bottom: 25px;
-      z-index: 10;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: 500;
     }
 
     .review-box {
-      width: 95%;
-      max-width: 700px;
-      background: rgba(247, 247, 247, 0.9);
-      border-radius: 30px;
-      padding: 24px;
-      font-size: 17px;
-      color: black;
-      font-weight: bold;
-      line-height: 1.6;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 650px;
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 25px;
+      padding: 20px 24px;
+      font-size: 16px;
+      color: #333;
+      line-height: 1.5;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
       text-align: left;
       position: relative;
-      z-index: 10;
-      margin-bottom: 40px; /* Add spacing below */
+      margin-bottom: 10px;
     }
 
     .copy-btn {
       position: absolute;
-      bottom: -16px;
-      left: 30px;
+      bottom: -14px;
+      left: 24px;
       background: #1976d2;
       color: white;
       border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
+      padding: 7px 16px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 13px;
       transition: 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     .copy-btn:hover {
@@ -81,17 +74,17 @@
 
     .google-btn {
       display: inline-block;
-      margin-top: 40px;
+      margin-top: 35px;
       border-radius: 8px;
       text-decoration: none;
-      color: black;
-      font-weight: bold;
-      padding: 12px 18px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 11px 20px;
       background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
       background-size: 500% 500%;
       animation: colorShift 6s infinite alternate;
-      z-index: 10;
-      margin-bottom: 40px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
     }
 
     @keyframes colorShift {
@@ -100,64 +93,37 @@
     }
 
     .star-section {
-      margin-top: 0px;
-      color: black;
-      font-weight: bold;
-      z-index: 10;
-      margin-bottom: 40px;
+      margin-top: 15px;
+      color: #333;
     }
 
     .star-section small {
       display: block;
-      font-size: 10px;
-      margin-top: 15px;
+      font-size: 11px;
+      margin-top: 8px;
+      color: #555;
     }
 
     .stars {
-      font-size: 25px;
-      letter-spacing: 3px;
-      margin-top: 20px;
+      font-size: 26px;
+      letter-spacing: 4px;
+      margin-top: 8px;
     }
 
     .thanks {
-      margin-top: 20px;
-      font-size: 28px;
-      font-family: 'Brush Script MT', cursive;
-      color: black;
-      font-weight: bold;
-      z-index: 10;
-      margin-bottom: 40px;
+      margin-top: 15px;
+      font-size: 22px;
+      font-family: 'Pacifico', cursive;
+      color: #2c5f2d;
     }
 
     .policy {
-      font-size: 12px;
-      color: black;
-      font-weight: bold;
-      margin-top: 35px;
-      line-height: 1.4;
-      z-index: 10;
-      margin-bottom: 40px;
+      font-size: 10px;
+      color: #555;
+      margin-top: 20px;
+      line-height: 1.3;
+      max-width: 650px;
     }
-
-    /* Park Silhouette (Fixed Background) */
-    .park {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 30vh;
-      min-height: 220px;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .park svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-
-    .park .fade { opacity: 0.06; }
   </style>
 </head>
 <body>
@@ -169,40 +135,29 @@
   </div>
 
   <a href="https://search.google.com/local/writereview?placeid=ChIJ704Msm_rwjsR3gIxUmMibJI" target="_blank" rel="noopener" class="google-btn">
-   click Google Review 
+    Google Reviews
   </a>
 
   <div class="star-section">
-    <small>only give </small>
+    <small>like only give</small>
     <div class="stars">⭐⭐⭐⭐⭐</div>
-    <small>May your day not be good but great!</small>
+    <small>Leave your valuable feedback!</small>
   </div>
 
-  <div class="thanks">Thanks for supporting us!</div>
+  <div class="thanks">Thanks you choosing Komal Caterers!</div>
 
   <div class="policy">
     <p>All reviews are voluntary and for feedback purposes only.</p>
     <p>By using this page, you agree that reviews reflect personal experience only.</p>
   </div>
 
-  <!-- Park silhouette -->
-  <div class="park" aria-hidden="true">
-    <svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <defs><style>.g-fill{ fill: #689F38; }</style></defs>
-      <path class="g-fill" d="M0,180C80,160 160,150 260,160C360,170 460,145 560,160C660,175 760,150 860,160C920,166 980,160 1000,160L1000,300 L0,300 Z"/>
-      <path class="g-fill" d="M0,200Q80,180 160,190T320,185T480,190T640,185T800,195T960,190L1000,220 L1000,300 L0,300 Z"/>
-      <g transform="translate(70,40)"><path class="g-fill" d="M70,40c40,-10 85,8 95,48c12,44 -18,76 -62,72c-22,-2 -38,-18 -46,-33C46,100 38,75 50,56C54,48 60,42 70,40Z"/><rect x="68" y="130" width="14" height="40" rx="3" class="g-fill"/></g>
-      <rect x="0" y="230" width="1000" height="70" fill="#000" class="fade"/>
-    </svg>
-  </div>
-
   <script>
     const reviews = [
+      "I went to citykart made made our park magiiceall park event! The food fresh delcious and beautifull presnted. Highly prathing for any gathning!",
       "Komal Caterers is simply outstanding! The entire staff was so professional and attentive.",
       "The food was genuinely delicious! Every dish was flavourful and fresh.",
       "Hosting an event with Komal Caterers was the best decision. Professional execution!",
-      "A delightful experience! Perfect service, amazing setup, and delicious food.",
-      "If you want rich flavours and true hospitality — Komal Caterers is the one!"
+      "A delightful experience! Perfect service, amazing setup, and delicious food."
     ];
 
     const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
