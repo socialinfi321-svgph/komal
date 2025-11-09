@@ -1,198 +1,192 @@
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Citykart Review</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Komal Caterers Reviews</title>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 24px;
-            padding: 40px 30px;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .logo {
-            font-size: 48px;
-            font-weight: bold;
-            color: #dc3545;
-            text-align: center;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
 
-        .subtitle {
-            text-align: center;
-            color: #555;
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-image: url('https://github.com/socialinfi321-svgph/komal/raw/main/1762664728696.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      padding-top: 380px;
+    }
 
-        .review-box {
-            background: rgba(240, 240, 245, 0.6);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.15);
-            line-height: 1.6;
-            color: #333;
-            font-size: 16px;
-        }
+    .subtitle {
+      font-size: 15px;
+      color: #4a4a4a;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
 
-        .copy-btn {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
+    .review-box {
+      width: 92%;
+      max-width: 660px;
+      background: rgba(245, 245, 245, 0.7);
+      border-radius: 28px;
+      padding: 22px 26px;
+      font-size: 16px;
+      color: #2c2c2c;
+      line-height: 1.6;
+      box-shadow: 6px 6px 20px rgba(0,0,0,0.2);
+      text-align: left;
+      position: relative;
+      margin-bottom: 15px;
+    }
 
-        .copy-btn:hover {
-            background: #0056b3;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-        }
+    .copy-btn {
+      position: absolute;
+      bottom: -15px;
+      left: 28px;
+      background: #1e88e5;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      transition: 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    }
 
-        .google-btn {
-            background: linear-gradient(90deg, #4CAF50, #8BC34A, #CDDC39, #FFC107);
-            background-size: 300% 100%;
-            color: white;
-            border: none;
-            padding: 16px 40px;
-            border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 25px auto;
-            display: block;
-            transition: all 0.3s ease;
-            animation: gradientShift 3s ease infinite;
-        }
+    .copy-btn:hover {
+      background: #1565c0;
+      transform: translateY(-2px);
+    }
 
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
+    .google-btn {
+      display: inline-block;
+      margin-top: 40px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 13px 24px;
+      background: linear-gradient(90deg, #66bb6a, #ffeb3b, #ff9800, #f44336);
+      background-size: 300% 100%;
+      animation: gradientSlide 4s ease-in-out infinite;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
 
-        .google-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
-        }
+    @keyframes gradientSlide {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        .rating-section {
-            text-align: center;
-            margin: 20px 0;
-        }
+    .star-section {
+      margin-top: 20px;
+      color: #3a3a3a;
+    }
 
-        .rating-text {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
+    .star-section small {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 10px;
+      color: #555;
+    }
 
-        .stars {
-            font-size: 40px;
-            letter-spacing: 5px;
-            margin: 10px 0;
-        }
+    .stars {
+      font-size: 32px;
+      letter-spacing: 5px;
+      margin: 10px 0;
+    }
 
-        .rating-message {
-            color: #555;
-            font-size: 15px;
-            margin-top: 10px;
-        }
+    .star-section .bottom-text {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #555;
+    }
 
-        .thank-you {
-            text-align: center;
-            font-size: 28px;
-            font-family: 'Brush Script MT', cursive;
-            color: #333;
-            margin: 30px 0 25px 0;
-        }
+    .thanks {
+      margin-top: 30px;
+      font-size: 26px;
+      font-family: 'Pacifico', cursive;
+      color: #2e7d32;
+    }
 
-        .disclaimer {
-            text-align: center;
-            color: #999;
-            font-size: 13px;
-            line-height: 1.6;
-            margin-top: 20px;
-        }
+    .policy {
+      font-size: 11px;
+      color: #666;
+      margin-top: 30px;
+      line-height: 1.4;
+      max-width: 660px;
+      padding: 0 20px;
+    }
 
-        .disclaimer p {
-            margin-bottom: 8px;
-        }
-    </style>
+    .policy p {
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">Citykart</div>
-        <div class="subtitle">To give review copy the text</div>
+  <div class="subtitle">To give review copy the text</div>
 
-        <div class="review-box">
-            I went to citykart for shopping with my friend and we buy prety gown for each each other. And it is very beautiful and comfortable thanks citykart for this .......
-            <button class="copy-btn" onclick="copyText()">Copy Text</button>
-        </div>
+  <div class="review-box" id="reviewBox">
+    <p id="reviewText"></p>
+    <button class="copy-btn" id="copyBtn">Copy Text</button>
+  </div>
 
-        <button class="google-btn" onclick="openGoogleReview()">Google Reviews</button>
+  <a href="https://search.google.com/local/writereview?placeid=ChIJ704Msm_rwjsR3gIxUmMibJI" target="_blank" rel="noopener" class="google-btn">
+    Google Reviews
+  </a>
 
-        <div class="rating-section">
-            <div class="rating-text">like only give</div>
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <div class="rating-message">May your day not be good but great!</div>
-        </div>
+  <div class="star-section">
+    <small>like only give</small>
+    <div class="stars">⭐⭐⭐⭐⭐</div>
+    <div class="bottom-text">May your day not be good but great!</div>
+  </div>
 
-        <div class="thank-you">Thanks for supporting us!</div>
+  <div class="thanks">Thanks for supporting us!</div>
 
-        <div class="disclaimer">
-            <p>All reviews are voluntary and for feedback purposes only.</p>
-            <p>By using this page, you agree that reviews reflect personal experience only.</p>
-        </div>
-    </div>
+  <div class="policy">
+    <p>All reviews are voluntary and for feedback purposes only.</p>
+    <p>By using this page, you agree that reviews reflect personal experience only.</p>
+  </div>
 
-    <script>
-        function copyText() {
-            const text = "I went to citykart for shopping with my friend and we buy prety gown for each each other. And it is very beautiful and comfortable thanks citykart for this .......";
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Text copied to clipboard!');
-            });
-        }
+  <script>
+    const reviews = [
+      "I went to citykart made made our park magiiceall park event! The food fresh delcious and beautifull presnted. Highly prathing for any gathning!",
+      "I went to citykart for shopping with my friend and we buy prety gown for each each otther. And it is very beautiful and comfortable thanks citykart for this .......",
+      "Komal Caterers is simply outstanding! The entire staff was so professional and attentive.",
+      "The food was genuinely delicious! Every dish was flavourful and fresh.",
+      "Hosting an event with Komal Caterers was the best decision. Professional execution!",
+      "A delightful experience! Perfect service, amazing setup, and delicious food."
+    ];
 
-        function openGoogleReview() {
-            // Replace with actual Google review link
-            window.open('https://www.google.com/search?q=citykart+reviews', '_blank');
-        }
-    </script>
+    const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
+    document.getElementById("reviewText").innerText = randomReview;
+
+    document.getElementById("copyBtn").addEventListener("click", async function() {
+      try {
+        await navigator.clipboard.writeText(randomReview);
+        this.innerText = "Copied ✓";
+        setTimeout(() => this.innerText = "Copy Text", 2000);
+      } catch (err) {
+        alert("Copy failed — please copy manually.");
+      }
+    });
+  </script>
 </body>
 </html>
-```
