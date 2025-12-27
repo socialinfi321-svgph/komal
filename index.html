@@ -1,9 +1,14 @@
-
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CityKart Review Promotion</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,675 +16,353 @@
     html, body {
       height: 100%;
       width: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
+      touch-action: pan-x pan-y; 
     }
 
     body {
       font-family: Arial, Helvetica, sans-serif;
       background-image: url('https://raw.githubusercontent.com/socialinfi321-svgph/komal/main/1766846491903.jpg');
       background-size: cover;
-      background-position: center;                      
+      background-position: center;
       background-repeat: no-repeat;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       text-align: center;
-      padding-top: 197px;
+      padding-top: 60px; 
+      padding-bottom: 50px;
       transition: background-color 0.3s, filter 0.3s;
     }
 
-    body.dark-mode {
-      filter: brightness(0.7);
-    }
-
+    body.dark-mode { filter: brightness(0.7); }
     body.dark-mode::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      pointer-events: none;
-      z-index: 0;
+      content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); z-index: -1; pointer-events: none;
     }
 
-    /* Hamburger Menu Button */
+    /* TOP BANNER */
+    .top-banner {
+        position: fixed; top: 0; left: 0; width: 100%; height: 50px;
+        background: linear-gradient(135deg, #b71c1c, #d32f2f, #ef5350); 
+        display: flex; justify-content: center; align-items: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 1000;
+    }
+    .banner-text {
+        color: white; font-size: 22px; font-weight: 800; letter-spacing: 1px;
+        text-transform: uppercase; font-family: 'Arial Black', sans-serif;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    /* MENU & INSTRUCTION BUTTONS */
     .menu-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 40px;
-      height: 40px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      z-index: 1001;
-      transition: 0.3s;
+      position: fixed; top: 15px; left: 20px; width: 24px; height: 20px; 
+      background: transparent; border: none; cursor: pointer;
+      display: flex; flex-direction: column; justify-content: space-between;
+      align-items: flex-start; z-index: 1002; transition: 0.3s;
     }
-
     .menu-btn span {
-      width: 28px;
-      height: 3px;
-      background: #333;
-      border-radius: 2px;
-      transition: 0.3s;
+      height: 2px; background: #fff; border-radius: 4px; transition: 0.3s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
+    .menu-btn span:nth-child(1) { width: 100%; }
+    .menu-btn span:nth-child(2) { width: 75%; }
+    .menu-btn span:nth-child(3) { width: 50%; }
 
-    body.dark-mode .menu-btn span {
-      background: #fff;
-    }
-
-    /* Instruction Button */
     .instruction-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 45px;
-      height: 45px;
+      position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px;
       background: linear-gradient(135deg, #0a1628, #1e3a5f);
-      border: 2px solid #00d4ff;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1001;
-      transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+      border: 2px solid #00d4ff; border-radius: 50%; cursor: pointer;
+      display: flex; justify-content: center; align-items: center;
+      z-index: 1001; transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
     }
-
-    .instruction-btn:hover {
-      transform: scale(1.1);
-    }
-
+    .instruction-btn:hover { transform: scale(1.1); }
     .instruction-btn::before {
-      content: '🤖';
-      font-size: 24px;
-      filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.8));
+      content: '🤖'; font-size: 24px; filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.8));
     }
 
-    /* --- UPDATED: Quick Info Box (Vertical 4 Steps) --- */
+    /* QUICK INFO BOX */
     .quick-info-box {
-      position: fixed;
-      bottom: 75px; 
-      right: 20px;
-      width: auto;
-      max-width: 200px;
-      
-      /* Transparency and Blur */
-      background: rgba(10, 22, 40, 0.65); 
-      backdrop-filter: blur(4px);
-      
-      border: 1px solid rgba(0, 212, 255, 0.4);
-      border-radius: 12px;
-      padding: 10px 12px;
-      z-index: 1000;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transform: translateY(10px);
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.4s ease;
-      
-      /* Flexbox for Vertical Steps */
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 5px;
-      text-align: left;
+      position: fixed; bottom: 75px; right: 20px; width: auto; max-width: 200px;
+      background: rgba(10, 22, 40, 0.65); backdrop-filter: blur(4px);
+      border: 1px solid rgba(0, 212, 255, 0.4); border-radius: 12px;
+      padding: 10px 12px; z-index: 1000; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(10px); opacity: 0; pointer-events: none;
+      transition: all 0.4s ease; display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: center; gap: 5px; text-align: left;
     }
-
-    .quick-info-box.show {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
+    .quick-info-box.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
     .quick-info-box::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      right: 18px;
-      width: 0;
-      height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
+      content: ''; position: absolute; bottom: -6px; right: 18px; width: 0; height: 0;
+      border-left: 6px solid transparent; border-right: 6px solid transparent;
       border-top: 6px solid rgba(0, 212, 255, 0.4);
     }
-
     .info-step {
-      color: #00d4ff;
-      font-size: 10px; /* Small text */
-      line-height: 1.2;
-      font-weight: 600;
+      color: #00d4ff; font-size: 10px; line-height: 1.2; font-weight: 600;
       text-shadow: 0 0 2px rgba(0,0,0,0.8);
     }
 
-    body.dark-mode .quick-info-box {
-      border-color: rgba(0, 240, 255, 0.4);
-      background: rgba(0, 0, 0, 0.7);
-    }
-    /* --- End Updated Section --- */
-
-    /* Side Menu */
+    /* SIDE MENU */
     .side-menu {
-      position: fixed;
-      top: 0;
-      left: -100%;
-      width: 280px;
-      height: 100%;
-      background: white;
-      z-index: 1000;
-      box-shadow: 2px 0 15px rgba(0,0,0,0.2);
-      transition: left 0.3s ease;
-      overflow-y: auto;
-      padding: 80px 25px 25px 25px;
+      position: fixed; top: 0; left: -100%; width: 280px; height: 100%;
+      background: white; z-index: 1000; box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+      transition: left 0.3s ease; overflow-y: auto; padding: 80px 25px 25px 25px;
     }
-
-    body.dark-mode .side-menu {
-      background: #1a1a1a;
-      color: #fff;
-    }
-
-    .side-menu.open {
-      left: 0;
-    }
-
+    .side-menu.open { left: 0; }
     .menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-      display: none;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); z-index: 999; display: none;
     }
+    .menu-overlay.show { display: block; }
+    .menu-content h3 { font-size: 18px; color: #333; margin-bottom: 15px; font-weight: 700; }
+    .menu-content p { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 12px; }
 
-    .menu-overlay.show {
-      display: block;
+    /* LOGO & SUBTITLE */
+    .logo-img {
+      width: 220px; height: auto; margin-bottom: 25px; margin-top: 30px; 
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); position: relative; z-index: 1;
     }
-
-    .menu-content h3 {
-      font-size: 18px;
-      color: #333;
-      margin-bottom: 15px;
-      font-weight: 700;
+    .subtitle-container {
+        background-color: transparent; padding: 5px 10px; margin-bottom: 25px;
+        box-shadow: none; display: inline-block; position: relative; z-index: 1;
     }
-
-    body.dark-mode .menu-content h3 {
-      color: #fff;
-    }
-
-    .menu-content p {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-    body.dark-mode .menu-content p {
-      color: #ccc;
-    }
-
-    /* Dark/Light Mode Toggle */
-    .mode-toggle {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid #ddd;
-    }
-
-    body.dark-mode .mode-toggle {
-      border-top: 1px solid #444;
-    }
-
-    .mode-toggle h4 {
-      font-size: 16px;
-      margin-bottom: 12px;
-      color: #333;
-    }
-
-    body.dark-mode .mode-toggle h4 {
-      color: #fff;
-    }
-
-    .toggle-switch {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .toggle-switch span {
-      font-size: 14px;
-      color: #666;
-    }
-
-    body.dark-mode .toggle-switch span {
-      color: #aaa;
-    }
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 26px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: 0.4s;
-      border-radius: 26px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: 0.4s;
-      border-radius: 50%;
-    }
-
-    input:checked + .slider {
-      background-color: #2196F3;
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(24px);
-    }
-
     .subtitle {
-      font-size: 14px;
-      color: #333;
-      margin-bottom: 15px;
-      font-weight: 700;
-      position: relative;
-      z-index: 1;
+      font-size: 16px; color: #fff !important; margin: 0; font-weight: 800;
+      position: relative; z-index: 1; text-transform: uppercase;
+      letter-spacing: 0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.7);
     }
 
-    body.dark-mode .subtitle {
-      color: #fff;
+    /* REVIEW SECTION WRAPPER */
+    .review-section-wrapper {
+        position: relative;
+        width: 95%;
+        max-width: 650px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 1;
+        margin-bottom: 50px; 
     }
 
+    /* ===== REVIEW BOX (Compact) ===== */
     .review-box {
-      position: absolute;
-      width: 95%;
-      max-width: 650px;
-      max-height: 100;
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: 100px; /* Smaller min-height */
       background: rgba(255, 255, 255, 0.75);
       border-radius: 25px;
-      padding: 20px 24px 50px 24px;
-      font-size: 13px;
-      font-family: 'Saira', Arial, Helvetica, sans-serif;
-      font-weight: 800;
-      color: #333;
-      line-height: 1.5;
       box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-      text-align: left;
-      position: relative;
-      margin-bottom: 10px;
-      z-index: 1;
+      
+      /* Reduced padding for compact look */
+      padding-bottom: 20px; 
+      
+      margin-bottom: 0;
+      font-family: Arial, sans-serif; 
+      font-weight: 700;
+      color: #333;
+      overflow: visible; /* Buttons can hang out */
+      transition: height 0.3s ease; 
+      z-index: 2; 
     }
 
-    body.dark-mode .review-box {
-      background: rgba(40, 40, 40, 0.85);
-      color: #fff;
+    /* CAROUSEL */
+    .carousel-track {
+      display: flex; width: 100%; height: auto; 
+      transition: transform 0.4s ease-in-out; align-items: flex-start; 
+    }
+    .carousel-slide {
+      min-width: 100%; height: auto; 
+      padding: 25px 40px 10px 40px; 
+      display: flex; flex-direction: column;
+      justify-content: flex-start; align-items: flex-start;
+      text-align: justify; text-justify: inter-word;
+    }
+    .review-text-content {
+      font-size: 14px; line-height: 1.4; width: 100%; margin: 0;
+      font-family: Arial, sans-serif; font-weight: 700; 
+      display: -webkit-box; -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
+    }
+    .review-text-content.expanded { -webkit-line-clamp: unset; overflow: visible; }
+
+    /* READ MORE (Left Side) */
+    .read-more-btn {
+        background: none; border: none; color: #00d4ff; font-weight: 700;
+        cursor: pointer; padding: 5px 0; font-size: 12px; margin-top: 5px;
+        outline: none;
+        align-self: flex-start; /* Aligns to Left */
     }
 
-    .text-limit {
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+    /* NAV ARROWS */
+    .nav-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.8); border: none; width: 30px; height: 30px;
+      border-radius: 50%; font-size: 18px; color: #333; cursor: pointer;
+      z-index: 5; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex; justify-content: center; align-items: center;
+    }
+    .nav-arrow.prev { left: 5px; }
+    .nav-arrow.next { right: 5px; }
+    .nav-arrow:disabled { opacity: 0.3; cursor: default; }
+
+    .slide-counter {
+      position: absolute; top: 10px; right: 20px; font-size: 10px;
+      color: #666; background: rgba(255,255,255,0.5); padding: 2px 6px;
+      border-radius: 8px; z-index: 6;
     }
 
-    .expand-dots {
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-      margin-top: 3px;
-      display: inline-block;
+    /* ===== COPY BUTTON (Half-in Half-out, Left) ===== */
+    .copy-btn-half {
+        position: absolute;
+        bottom: -20px; /* Pulls it down 50% */
+        left: 30px;
+        
+        background: #1976d2;
+        color: white;
+        border: none;
+        padding: 10px 24px; /* Standard Size */
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 13px;
+        transition: 0.3s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        z-index: 10;
+    }
+    .copy-btn-half:hover {
+        background: #0d47a1;
+        transform: translateY(-2px);
     }
 
-    .copy-btn {
-      position: absolute;
-      bottom: 10px;
-      left: 24px;
-      background: #1976d2;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      transition: 0.3s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    /* ===== TYPE BUTTON (Circle, INSIDE, Bottom Right) ===== */
+    .type-btn-inside {
+        position: absolute;
+        bottom: 15px; /* Inside the box padding area */
+        right: 20px;
+
+        background: #43a047; /* Green */
+        color: white;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%; /* Circle */
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 10px;
+        display: flex; justify-content: center; align-items: center;
+        transition: 0.3s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        text-transform: uppercase; letter-spacing: 0.5px;
+        z-index: 9;
+    }
+    .type-btn-inside:hover {
+        background: #2e7d32;
+        transform: scale(1.1);
     }
 
-    .copy-btn:hover {
-      background: #0d47a1;
-    }
-
+    /* GOOGLE BUTTON */
     .google-btn {
-      display: inline-block;
-      margin-top: 35px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 600;
-      font-size: 15px;
+      display: inline-block; margin-top: 10px; border-radius: 8px;
+      text-decoration: none; color: #fff; font-weight: 600; font-size: 15px;
       padding: 11px 20px;
       background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
-      background-size: 500% 500%;
-      animation: colorShift 2s infinite alternate;
+      background-size: 500% 500%; animation: colorShift 2s infinite alternate;
       box-shadow: 0 3px 12px rgba(0,0,0,0.25), 0 0 8px rgba(66, 133, 244, 0.3);
-      cursor: pointer;
-      transition: 0.3s;
-      position: relative;
-      z-index: 1;
+      cursor: pointer; transition: 0.3s; position: relative; z-index: 1;
     }
-
-    .google-btn.disabled {
-      cursor: not-allowed;
-    }
-
+    .google-btn.disabled { cursor: not-allowed; opacity: 0.7; }
     @keyframes colorShift {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+      0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; }
     }
 
     .star-section {
-      margin-top: 40px;
-      text-align: center;
-      color: #000;
-      position: relative;
-      z-index: 1;
+      margin-top: 35px; text-align: center; color: #000; position: relative; z-index: 1;
     }
-
-    body.dark-mode .star-section {
-      color: #fff;
+    .star-section .top-text, .star-section .bottom-text {
+      display: block; font-size: 10px; font-weight: 500;
     }
-
-    .star-section .top-text {
-      display: block;
-      font-size: 10px;
-      margin-bottom: 2px;
-      color: #000;
-      font-weight: 500;
-    }
-
-    body.dark-mode .star-section .top-text {
-      color: #fff;
-    }
-
-    .stars {
-      font-size: 22px;
-      letter-spacing: 3px;
-      margin: 0;
-    }
-
-    .star-section .bottom-text {
-      display: block;
-      font-size: 10px;
-      margin-top: 2px;
-      color: #000;
-      font-weight: 500;
-    }
-
-    body.dark-mode .star-section .bottom-text {
-      color: #fff;
-    }
-
+    .stars { font-size: 22px; letter-spacing: 3px; margin: 0; }
     .thanks {
-      margin-top: 30px;
-      font-size: 28px;
-      font-family: 'Brush Script MT', cursive;
-      color: #000;
-      text-align: center;
-      font-weight: 700;
-      position: relative;
-      z-index: 1;
+      margin-top: 25px; font-size: 32px; font-family: 'Rubik Wet Paint', cursive;
+      color: #000; text-align: center; font-weight: 400; position: relative;
+      z-index: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
 
-    body.dark-mode .thanks {
-      color: #fff;
-    }
-
-    /* Instruction Popup */
+    /* INSTRUCTION POPUP */
     .instruction-popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6); z-index: 2000;
+      justify-content: center; align-items: center;
     }
-
-    .instruction-popup.show {
-      display: flex;
-    }
-
+    .instruction-popup.show { display: flex; }
     .instruction-box {
-      background: white;
-      border-radius: 20px;
-      padding: 30px 25px;
-      max-width: 320px;
-      width: 85%;
-      text-align: left;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      animation: instructionSlide 0.3s ease-out;
+      background: white; border-radius: 20px; padding: 30px 25px;
+      max-width: 320px; width: 85%; text-align: left;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3); animation: instructionSlide 0.3s ease-out;
     }
-
-    body.dark-mode .instruction-box {
-      background: #2a2a2a;
-      color: #fff;
-    }
-
-    @keyframes instructionSlide {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
+    @keyframes instructionSlide { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     .instruction-box h3 {
-      font-size: 20px;
-      color: #4285F4;
-      margin-bottom: 20px;
-      text-align: center;
-      font-weight: 700;
+      font-size: 20px; color: #4285F4; margin-bottom: 20px;
+      text-align: center; font-weight: 700;
     }
-
-    body.dark-mode .instruction-box h3 {
-      color: #5A9DFF;
-    }
-
     .instruction-step {
-      margin-bottom: 18px;
-      padding: 12px;
-      background: #f5f5f5;
-      border-radius: 10px;
-      border-left: 4px solid #4285F4;
+      margin-bottom: 18px; padding: 12px; background: #f5f5f5;
+      border-radius: 10px; border-left: 4px solid #4285F4;
     }
-
-    body.dark-mode .instruction-step {
-      background: #1a1a1a;
-      border-left-color: #5A9DFF;
-    }
-
-    .step-number {
-      font-weight: 700;
-      color: #4285F4;
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    body.dark-mode .step-number {
-      color: #5A9DFF;
-    }
-
-    .step-text {
-      font-size: 14px;
-      color: #333;
-      line-height: 1.5;
-    }
-
-    body.dark-mode .step-text {
-      color: #ccc;
-    }
-
+    .step-number { font-weight: 700; color: #4285F4; font-size: 16px; margin-bottom: 5px; }
+    .step-text { font-size: 14px; color: #333; line-height: 1.5; }
     .close-instruction {
-      width: 100%;
-      padding: 12px;
-      background: #4285F4;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: 0.3s;
+      width: 100%; padding: 12px; background: #4285F4; color: white; border: none;
+      border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer;
+      margin-top: 10px; transition: 0.3s;
     }
 
-    .close-instruction:hover {
-      background: #3367D6;
-    }
-
-    /* Full Screen Star Animation */
+    /* STAR ANIMATION OVERLAY */
     .star-animation-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      z-index: 3000;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      animation: slideDown 0.5s ease-out;
+      z-index: 3000; justify-content: center; align-items: center;
+      flex-direction: column; animation: slideDown 0.5s ease-out;
     }
-
-    .star-animation-overlay.show {
-      display: flex;
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(0); }
-    }
-
+    .star-animation-overlay.show { display: flex; }
+    @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
     .animation-text {
-      font-size: 24px;
-      color: white;
-      font-weight: 700;
-      margin-bottom: 30px;
-      text-align: center;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      font-size: 24px; color: white; font-weight: 700; margin-bottom: 30px;
+      text-align: center; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
+    .animated-stars { display: flex; gap: 15px; font-size: 50px; }
+    .animated-star { opacity: 0.3; transition: all 0.5s ease; filter: grayscale(100%); }
+    .animated-star.light { opacity: 1; filter: grayscale(0%); animation: starGlow 0.5s ease; }
+    @keyframes starGlow { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
 
-    .animated-stars {
-      display: flex;
-      gap: 15px;
-      font-size: 50px;
-    }
-
-    .animated-star {
-      opacity: 0.3;
-      transition: all 0.5s ease;
-      filter: grayscale(100%);
-    }
-
-    .animated-star.light {
-      opacity: 1;
-      filter: grayscale(0%);
-      animation: starGlow 0.5s ease;
-    }
-
-    @keyframes starGlow {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-      100% { transform: scale(1); }
-    }
-
-    /* Copy Warning Popup */
+    /* POPUP OVERLAY */
     .popup-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); z-index: 2000;
+      justify-content: center; align-items: center;
     }
-
-    .popup-overlay.show {
-      display: flex;
-    }
-
+    .popup-overlay.show { display: flex; }
     .popup-box {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      max-width: 280px;
-      width: 80%;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      background: white; border-radius: 15px; padding: 20px; max-width: 280px;
+      width: 80%; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.25);
       animation: popupSlide 0.25s ease-out;
     }
-
-    body.dark-mode .popup-box {
-      background: #2a2a2a;
-    }
-
-    @keyframes popupSlide {
-      from { transform: translateY(-30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .popup-message {
-      font-size: 15px;
-      color: #333;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-
-    body.dark-mode .popup-message {
-      color: #fff;
-    }
+    @keyframes popupSlide { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .popup-message { font-size: 15px; color: #333; font-weight: 600; line-height: 1.4; }
   </style>
 </head>
+
 <body>
+
+  <div class="top-banner">
+      <span class="banner-text">CityKart</span>
+  </div>
 
   <button class="menu-btn" id="menuBtn">
     <span></span>
@@ -705,47 +388,26 @@
       <p>By using this page, you agree that reviews reflect personal experience only.</p>
       <p>.....................................</p>
       <p>This is a paid review promotion designed to help both new and established brands strengthen their market visibility and consumer trust.</p>
-      <p>In today's competitive environment, obtaining genuine reviews has become increasingly difficult, even for brands that provide excellent products and services.</p>
-      <p>Through this promotional service, we help highlight brands that are performing well</p>
-      <p>but are not receiving sufficient customer feedback due to market competition or being newly launched.</p>
-      <p>We also support older, established brands in maintaining their credibility and trust among consumers</p>
-      <p>by ensuring continuous engagement through transparent, paid promotional reviews.</p>
-      <p>We strictly ensure that all brands we promote are trustworthy, reliable, and operate professionally.</p>
-      <p>Our goal is to support genuine brands while maintaining honesty, transparency, and fairness for consumers</p>
-      
-      <div class="mode-toggle">
-        <h4>Theme</h4>
-        <div class="toggle-switch">
-          <span>Light</span>
-          <label class="switch">
-            <input type="checkbox" id="darkModeToggle">
-            <span class="slider"></span>
-          </label>
-          <span>Dark</span>
-        </div>
-      </div>
+      <p>In today's competitive environment, obtaining genuine reviews has become increasingly difficult.</p>
+      <p>We support genuine brands while maintaining honesty, transparency, and fairness for consumers.</p>
     </div>
   </div>
 
   <div class="instruction-popup" id="instructionPopup">
     <div class="instruction-box">
       <h3>📋 Detailed Instructions</h3>
-      
       <div class="instruction-step">
         <div class="step-number">Step 1:</div>
-        <div class="step-text">Copy the text from the review box below</div>
+        <div class="step-text">Use the arrows to choose a review.</div>
       </div>
-
       <div class="instruction-step">
         <div class="step-number">Step 2:</div>
-        <div class="step-text">Click on "Google Reviews" button</div>
+        <div class="step-text">Click "Copy Text"</div>
       </div>
-
       <div class="instruction-step">
         <div class="step-number">Step 3:</div>
-        <div class="step-text">Give 5 stars ⭐⭐⭐⭐⭐ and paste the text in the review box</div>
+        <div class="step-text">Click "Google Reviews", give 5 stars, and paste the text.</div>
       </div>
-
       <button class="close-instruction" id="closeInstruction">Got it!</button>
     </div>
   </div>
@@ -761,13 +423,31 @@
     </div>
   </div>
 
-  <div class="subtitle">To give review, copy the text below 👇</div>
+  <img src="https://raw.githubusercontent.com/socialinfi321-svgph/komal/main/LOGO-PNG-.png.webp" alt="Logo" class="logo-img">
 
-  <div class="review-box" id="reviewBox">
-    <p id="reviewText" class="text-limit">Loading review...</p>
-    <span id="expandDots" class="expand-dots">.........</span>
-    <button class="copy-btn" id="copyBtn">Copy Text</button>
+  <div class="subtitle-container">
+    <div class="subtitle">Contribute Google Review</div>
   </div>
+
+  <div class="review-section-wrapper">
+      <div class="review-box" id="reviewBox">
+        <div class="slide-counter" id="slideCounter">1/5</div>
+        
+        <button class="nav-arrow prev" id="prevBtn" disabled>&#10094;</button>
+        <button class="nav-arrow next" id="nextBtn">&#10095;</button>
+
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <p class="review-text-content">Loading reviews...</p>
+          </div>
+        </div>
+
+        <button class="type-btn-inside" id="typeBtn">Type</button>
+      </div>
+
+      <button class="copy-btn-half" id="copyBtn">Copy Text</button>
+  </div>
+
 
   <a id="googleBtn" class="google-btn disabled">Google Reviews</a>
 
@@ -788,40 +468,37 @@
 <script>
     const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxmXrp8e5PZf344YG9LXj_lTIzMsvq2wn-Ufi2YE5D7W0_qGzKgRvOT1VfQHw1qCeer/exec';
 
-    const reviewText = document.getElementById('reviewText');
-    const expandDots = document.getElementById('expandDots');
+    const carouselTrack = document.getElementById('carouselTrack');
     const copyBtn = document.getElementById('copyBtn');
+    const typeBtn = document.getElementById('typeBtn');
     const googleBtn = document.getElementById('googleBtn');
     const popupOverlay = document.getElementById('popupOverlay');
     const menuBtn = document.getElementById('menuBtn');
     const sideMenu = document.getElementById('sideMenu');
     const menuOverlay = document.getElementById('menuOverlay');
-    const darkModeToggle = document.getElementById('darkModeToggle');
     const instructionBtn = document.getElementById('instructionBtn');
     const instructionPopup = document.getElementById('instructionPopup');
     const closeInstruction = document.getElementById('closeInstruction');
     const starAnimationOverlay = document.getElementById('starAnimationOverlay');
     const quickInfoBox = document.getElementById('quickInfoBox');
+    
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideCounter = document.getElementById('slideCounter');
 
-    let currentReviewId = null;
+    let reviewData = []; 
+    let currentSlide = 0;
     let copyClicked = false;
-    let reviewReserved = false;
-    let infoBoxShown = false;
 
     /* Auto-show info box on page load */
     window.addEventListener('load', () => {
       setTimeout(() => {
         quickInfoBox.classList.add('show');
-        infoBoxShown = true;
-        
-        // Hide after 4 seconds as requested
-        setTimeout(() => {
-          quickInfoBox.classList.remove('show');
-        }, 4000);
+        setTimeout(() => quickInfoBox.classList.remove('show'), 10000);
       }, 500);
     });
 
-    /* Instruction Button - Toggle info box */
+    /* Instruction Button */
     instructionBtn.addEventListener('click', () => {
       if (quickInfoBox.classList.contains('show')) {
         quickInfoBox.classList.remove('show');
@@ -835,22 +512,13 @@
     });
 
     instructionPopup.addEventListener('click', (e) => {
-      if (e.target === instructionPopup) {
-        instructionPopup.classList.remove('show');
-      }
+      if (e.target === instructionPopup) instructionPopup.classList.remove('show');
     });
 
     /* Menu Toggle */
     menuBtn.addEventListener('click', () => {
-      const isOpen = sideMenu.classList.contains('open');
-      
-      if (isOpen) {
-        sideMenu.classList.remove('open');
-        menuOverlay.classList.remove('show');
-      } else {
-        sideMenu.classList.add('open');
-        menuOverlay.classList.add('show');
-      }
+      sideMenu.classList.add('open');
+      menuOverlay.classList.add('show');
     });
 
     menuOverlay.addEventListener('click', () => {
@@ -858,52 +526,18 @@
       menuOverlay.classList.remove('show');
     });
 
-    /* Dark Mode Toggle */
-    darkModeToggle.addEventListener('change', () => {
-      if (darkModeToggle.checked) {
-        document.body.classList.add('dark-mode');
-        localStorage.setItem('darkMode', 'enabled');
-      } else {
-        document.body.classList.remove('dark-mode');
-        localStorage.setItem('darkMode', 'disabled');
-      }
-    });
-
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-      darkModeToggle.checked = true;
-    }
-
-    /* Expand / Collapse */
-    let expanded = false;
-
-    expandDots.addEventListener("click", () => {
-      if (!expanded) {
-        reviewText.classList.remove("text-limit");
-        expandDots.textContent = " show less";
-        expanded = true;
-      } else {
-        reviewText.classList.add("text-limit");
-        expandDots.textContent = ".........";
-        expanded = false;
-      }
-    });
-
     function showPopup() {
       popupOverlay.classList.add('show');
       setTimeout(() => popupOverlay.classList.remove('show'), 2000);
     }
 
-    /* Star Animation Function */
+    /* Star Animation */
     function showStarAnimation() {
       starAnimationOverlay.classList.add('show');
-      
       const stars = document.querySelectorAll('.animated-star');
       
       stars.forEach((star, index) => {
-        setTimeout(() => {
-          star.classList.add('light');
-        }, index * 400);
+        setTimeout(() => star.classList.add('light'), index * 400);
       });
 
       setTimeout(() => {
@@ -913,87 +547,180 @@
       }, 3000);
     }
 
-    async function fetchReview() {
-      try {
-        const response = await fetch(SHEET_API_URL + '?action=reserve');
-        const textData = await response.text();
-
-        let data;
-        try { data = JSON.parse(textData); }
-        catch {
-          reviewText.innerText = textData.trim();
-          reviewText.classList.add("text-limit");
-          setupCopyButton(textData.trim());
-          return;
+    /* Function to toggle read more */
+    function toggleReadMore(textId, btn) {
+        const textElement = document.getElementById(textId);
+        textElement.classList.toggle('expanded');
+        if (textElement.classList.contains('expanded')) {
+            btn.innerText = "Show less";
+        } else {
+            btn.innerText = "Read more";
         }
-
-        if (data.review) {
-          currentReviewId = data.id;
-          reviewReserved = true;
-
-          reviewText.innerText = data.review;
-          reviewText.classList.add("text-limit");
-          expandDots.style.display = "inline-block";
-
-          setupCopyButton(data.review);
-
-          setTimeout(() => {
-            if (!copyClicked && reviewReserved) releaseReview();
-          }, 60000);
-        }
-
-      } catch {
-        reviewText.innerText = "Error fetching review.";
-      }
     }
 
-    async function releaseReview() {
-      if (!currentReviewId || !reviewReserved) return;
-      await fetch(`${SHEET_API_URL}?action=release&id=${currentReviewId}`);
-      reviewReserved = false;
+
+    /* FETCH 5 REVIEWS LOGIC */
+    async function fetchAllReviews() {
+        const reviewsToFetch = 5;
+        let fetchedCount = 0;
+        
+        carouselTrack.innerHTML = '';
+
+        for (let i = 0; i < reviewsToFetch; i++) {
+            try {
+                const response = await fetch(SHEET_API_URL + '?action=reserve');
+                const textData = await response.text();
+                
+                let data;
+                try {
+                    data = JSON.parse(textData);
+                } catch {
+                    data = { review: textData.trim(), id: null };
+                }
+
+                if (data.review) {
+                    reviewData.push({
+                        id: data.id,
+                        text: data.review
+                    });
+                    
+                    // Create Slide with Read More button
+                    const slide = document.createElement('div');
+                    slide.className = 'carousel-slide';
+                    const textId = `reviewText${i}`;
+                    slide.innerHTML = `
+                        <p class="review-text-content" id="${textId}">${data.review}</p>
+                        <button class="read-more-btn" onclick="toggleReadMore('${textId}', this)">Read more</button>
+                    `;
+                    carouselTrack.appendChild(slide);
+                }
+            } catch (err) {
+                console.error("Error fetching review " + i, err);
+            }
+        }
+
+        if (reviewData.length === 0) {
+            carouselTrack.innerHTML = '<div class="carousel-slide"><p class="review-text-content">No reviews available. Please reload.</p></div>';
+        } else {
+            updateSlidePosition();
+            updateButtons();
+            
+            setTimeout(() => {
+                if (!copyClicked) releaseAllReviews();
+            }, 120000);
+        }
     }
 
-    function setupCopyButton(textToCopy) {
-      const newBtn = copyBtn.cloneNode(true);
-      copyBtn.parentNode.replaceChild(newBtn, copyBtn);
+    /* CAROUSEL LOGIC */
+    function updateSlidePosition() {
+        carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        slideCounter.textContent = `${currentSlide + 1}/${reviewData.length}`;
+        
+        const allTexts = document.querySelectorAll('.review-text-content');
+        const allBtns = document.querySelectorAll('.read-more-btn');
+        allTexts.forEach(text => text.classList.remove('expanded'));
+        allBtns.forEach(btn => btn.innerText = "Read more");
+    }
 
-      newBtn.addEventListener("click", async () => {
-        await navigator.clipboard.writeText(textToCopy);
-        newBtn.innerText = "Copied ✓";
+    function updateButtons() {
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === reviewData.length - 1;
+    }
 
+    nextBtn.addEventListener('click', () => {
+        if (currentSlide < reviewData.length - 1) {
+            currentSlide++;
+            updateSlidePosition();
+            updateButtons();
+            copyBtn.innerText = "Copy Text";
+            copyClicked = false;
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSlidePosition();
+            updateButtons();
+            copyBtn.innerText = "Copy Text";
+            copyClicked = false;
+        }
+    });
+
+    // Touch Swipe Logic
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carouselTrack.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    carouselTrack.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        if (touchEndX < touchStartX - 50) {
+            if (currentSlide < reviewData.length - 1) nextBtn.click();
+        }
+        if (touchEndX > touchStartX + 50) {
+            if (currentSlide > 0) prevBtn.click();
+        }
+    }
+
+    /* COPY & API LOGIC */
+    copyBtn.addEventListener("click", async () => {
+        if (reviewData.length === 0) return;
+
+        const currentText = reviewData[currentSlide].text;
+        
+        await navigator.clipboard.writeText(currentText);
+        copyBtn.innerText = "Copied ✓";
         copyClicked = true;
         googleBtn.classList.remove('disabled');
 
-        setTimeout(() => newBtn.innerText = "Copy Text", 2000);
-      });
-    }
+        setTimeout(() => copyBtn.innerText = "Copy Text", 2000);
+    });
+
+    /* TYPE BUTTON LOGIC */
+    typeBtn.addEventListener("click", () => {
+        window.open('https://reviewthis.biz/9580d9a4', '_blank');
+    });
 
     googleBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      if (!copyClicked) {
-        showPopup();
-        return;
-      }
+        if (!copyClicked) {
+            showPopup();
+            return;
+        }
 
-      if (copyClicked && currentReviewId && reviewReserved) {
-        await fetch(`${SHEET_API_URL}?action=confirmUsed&id=${currentReviewId}`);
-        reviewReserved = false;
-      }
+        const currentId = reviewData[currentSlide].id;
+        if (currentId) {
+            await fetch(`${SHEET_API_URL}?action=confirmUsed&id=${currentId}`);
+        }
 
-      showStarAnimation();
+        showStarAnimation();
     });
+
+    async function releaseAllReviews() {
+        for (let item of reviewData) {
+           if(item.id) {
+               navigator.sendBeacon(`${SHEET_API_URL}?action=release&id=${item.id}`);
+           }
+        }
+    }
 
     window.addEventListener('beforeunload', () => {
-      if (!copyClicked && reviewReserved)
-        navigator.sendBeacon(`${SHEET_API_URL}?action=release&id=${currentReviewId}`);
+        if (!copyClicked && reviewData.length > 0) {
+            releaseAllReviews();
+        }
     });
 
-    fetchReview();
+    // Start Fetching
+    fetchAllReviews();
 </script>
 
 </body>
 </html>
-
-
-
