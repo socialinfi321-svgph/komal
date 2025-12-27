@@ -9,108 +9,82 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
-      touch-action: pan-x pan-y; 
+      height: 100%; width: 100%; overflow-x: hidden; touch-action: pan-x pan-y; 
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      /* Background Image removed as requested */
-      background-color: #f0f0f0; /* Default clean background color */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: center;
-      padding-top: 60px; 
-      padding-bottom: 50px;
-      transition: background-color 0.3s, filter 0.3s;
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: #f4f6f8;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      text-align: center; padding-top: 60px; padding-bottom: 50px;
     }
-
-    body.dark-mode { filter: brightness(0.7); }
-    body.dark-mode::before {
-      content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5); pointer-events: none; z-index: 0;
-    }
-    
-    /* Blur effect (body::after) removed as requested */
 
     /* TOP BANNER */
     .top-banner {
         position: fixed; top: 0; left: 0; width: 100%; height: 50px;
         background: linear-gradient(135deg, #b71c1c, #d32f2f, #ef5350); 
         display: flex; justify-content: center; align-items: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 1000;
     }
     .banner-text {
-        color: white; font-size: 22px; font-weight: 800; letter-spacing: 1px;
-        text-transform: uppercase; font-family: 'Arial Black', sans-serif;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        color: white; font-size: 20px; font-weight: 800; letter-spacing: 1px;
+        text-transform: uppercase;
     }
 
-    /* MENU & INSTRUCTION BUTTONS */
+    /* MENU & BUTTONS */
     .menu-btn {
       position: fixed; top: 15px; left: 20px; width: 24px; height: 20px; 
       background: transparent; border: none; cursor: pointer;
       display: flex; flex-direction: column; justify-content: space-between;
-      align-items: flex-start; z-index: 1002; transition: 0.3s;
+      align-items: flex-start; z-index: 1002;
     }
     .menu-btn span {
-      height: 2px; background: #fff; border-radius: 4px; transition: 0.3s;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      height: 2px; background: #fff; border-radius: 4px; width: 100%;
     }
-    .menu-btn span:nth-child(1) { width: 100%; }
-    .menu-btn span:nth-child(2) { width: 75%; }
-    .menu-btn span:nth-child(3) { width: 50%; }
 
+    /* INSTRUCTION BUTTON */
     .instruction-btn {
       position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px;
       background: linear-gradient(135deg, #0a1628, #1e3a5f);
       border: 2px solid #00d4ff; border-radius: 50%; cursor: pointer;
       display: flex; justify-content: center; align-items: center;
-      z-index: 1001; transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+      z-index: 1001; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
     }
-    .instruction-btn:hover { transform: scale(1.1); }
-    .instruction-btn::before {
-      content: '🤖'; font-size: 24px; filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.8));
+    .instruction-btn::before { content: '🤖'; font-size: 22px; }
+
+    /* TYPE BUTTON */
+    .type-btn-fixed {
+        position: fixed; bottom: 20px; left: 20px; width: 45px; height: 45px;
+        background: #43a047; color: white; border: none; border-radius: 50%;
+        cursor: pointer; font-weight: 700; font-size: 10px;
+        display: flex; justify-content: center; align-items: center;
+        transition: 0.3s; box-shadow: 0 4px 15px rgba(67, 160, 71, 0.3);
+        text-transform: uppercase; z-index: 1001;
     }
+    .type-btn-fixed:hover { transform: scale(1.1); }
 
     /* QUICK INFO BOX */
     .quick-info-box {
       position: fixed; bottom: 75px; right: 20px; width: auto; max-width: 200px;
-      background: rgba(10, 22, 40, 0.65); backdrop-filter: blur(4px);
-      border: 1px solid rgba(0, 212, 255, 0.4); border-radius: 12px;
-      padding: 10px 12px; z-index: 1000; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transform: translateY(10px); opacity: 0; pointer-events: none;
-      transition: all 0.4s ease; display: flex; flex-direction: column;
-      align-items: flex-start; justify-content: center; gap: 5px; text-align: left;
+      background: rgba(10, 22, 40, 0.9); backdrop-filter: blur(5px);
+      border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 12px;
+      padding: 10px 12px; z-index: 1000; opacity: 0; pointer-events: none;
+      transition: all 0.4s ease; text-align: left; transform: translateY(10px);
     }
     .quick-info-box.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
-    .quick-info-box::after {
-      content: ''; position: absolute; bottom: -6px; right: 18px; width: 0; height: 0;
-      border-left: 6px solid transparent; border-right: 6px solid transparent;
-      border-top: 6px solid rgba(0, 212, 255, 0.4);
-    }
-    .info-step {
-      color: #00d4ff; font-size: 10px; line-height: 1.2; font-weight: 600;
-      text-shadow: 0 0 2px rgba(0,0,0,0.8);
-    }
+    .info-step { color: #00d4ff; font-size: 10px; font-weight: 600; margin-bottom: 3px; }
 
     /* SIDE MENU */
     .side-menu {
       position: fixed; top: 0; left: -100%; width: 280px; height: 100%;
-      background: white; z-index: 1000; box-shadow: 2px 0 15px rgba(0,0,0,0.2);
-      transition: left 0.3s ease; overflow-y: auto; padding: 80px 25px 25px 25px;
+      background: white; z-index: 1000; transition: left 0.3s ease; 
+      padding: 80px 25px 25px 25px; box-shadow: 2px 0 15px rgba(0,0,0,0.1);
     }
     .side-menu.open { left: 0; }
     .menu-overlay {
@@ -118,230 +92,142 @@
       background: rgba(0, 0, 0, 0.5); z-index: 999; display: none;
     }
     .menu-overlay.show { display: block; }
-    .menu-content h3 { font-size: 18px; color: #333; margin-bottom: 15px; font-weight: 700; }
-    .menu-content p { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 12px; }
+    .menu-content h3 { font-size: 18px; margin-bottom: 15px; }
+    .menu-content p { font-size: 13px; color: #555; margin-bottom: 10px; }
 
-    /* LOGO & SUBTITLE */
-    .logo-img {
-      width: 220px; height: auto; margin-bottom: 25px; margin-top: 30px; 
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); position: relative; z-index: 1;
-    }
-    .subtitle-container {
-        background-color: transparent; padding: 5px 10px; margin-bottom: 25px;
-        box-shadow: none; display: inline-block; position: relative; z-index: 1;
-    }
-    .subtitle {
-      font-size: 16px; color: #333 !important; /* Changed to dark for visibility since bg is plain */
-      margin: 0; font-weight: 800;
-      position: relative; z-index: 1; text-transform: uppercase;
-      letter-spacing: 0.5px; text-shadow: none; /* Removed shadow for plain background */
-    }
+    /* LOGO & LAYOUT */
+    .logo-img { width: 200px; height: auto; margin-bottom: 20px; margin-top: 25px; }
+    .subtitle { font-size: 15px; color: #444; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 0.5px; }
 
-    /* REVIEW SECTION WRAPPER */
+    /* REVIEW CARD */
     .review-section-wrapper {
-        position: relative;
-        width: 95%;
-        max-width: 650px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 1;
-        margin-bottom: 50px; 
+        position: relative; width: 92%; max-width: 600px;
+        display: flex; flex-direction: column; align-items: center; margin-bottom: 50px; 
     }
-
-    /* ===== REVIEW BOX (Compact) ===== */
     .review-box {
-      position: relative;
-      width: 100%;
-      height: auto;
-      min-height: 100px; /* Smaller min-height */
-      background: rgba(255, 255, 255, 0.75);
-      border-radius: 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-      
-      /* Reduced padding for compact look */
-      padding-bottom: 20px; 
-      
-      margin-bottom: 0;
-      font-family: Arial, sans-serif; 
-      font-weight: 700;
-      color: #333;
-      overflow: visible; /* Buttons can hang out */
-      transition: height 0.3s ease; 
-      z-index: 2; 
+      position: relative; width: 100%; min-height: 120px;
+      background: white; border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding-bottom: 20px;
+      margin-bottom: 0; overflow: hidden;
     }
-
-    /* CAROUSEL */
-    .carousel-track {
-      display: flex; width: 100%; height: auto; 
-      transition: transform 0.4s ease-in-out; align-items: flex-start; 
-    }
+    .carousel-track { display: flex; width: 100%; transition: transform 0.4s ease-in-out; }
     .carousel-slide {
-      min-width: 100%; height: auto; 
-      padding: 25px 40px 10px 40px; 
-      display: flex; flex-direction: column;
-      justify-content: flex-start; align-items: flex-start;
-      text-align: justify; text-justify: inter-word;
+      min-width: 100%; padding: 35px 40px 10px 40px; 
+      display: flex; flex-direction: column; align-items: flex-start; text-align: left;
     }
-    .review-text-content {
-      font-size: 14px; line-height: 1.4; width: 100%; margin: 0;
-      font-family: Arial, sans-serif; font-weight: 700; 
-      display: -webkit-box; -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
+    .review-text-content { font-size: 14px; line-height: 1.5; font-weight: 600; color: #333; }
+    
+    /* LOADING TEXT STYLE */
+    .loading-text {
+        font-size: 11px; color: #888; font-weight: 500; font-style: italic;
+        width: 100%; text-align: center; margin-top: 10px;
+        animation: blink 1.5s infinite;
     }
-    .review-text-content.expanded { -webkit-line-clamp: unset; overflow: visible; }
+    @keyframes blink { 50% { opacity: 0.5; } }
 
-    /* READ MORE (Left Side) */
-    .read-more-btn {
-        background: none; border: none; color: #00d4ff; font-weight: 700;
-        cursor: pointer; padding: 5px 0; font-size: 12px; margin-top: 5px;
-        outline: none;
-        align-self: flex-start; /* Aligns to Left */
-    }
-
-    /* NAV ARROWS */
     .nav-arrow {
       position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(255,255,255,0.8); border: none; width: 30px; height: 30px;
-      border-radius: 50%; font-size: 18px; color: #333; cursor: pointer;
-      z-index: 5; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      display: flex; justify-content: center; align-items: center;
+      background: rgba(0,0,0,0.03); border: none; width: 28px; height: 28px;
+      border-radius: 50%; font-size: 16px; color: #333; cursor: pointer; z-index: 5;
     }
     .nav-arrow.prev { left: 5px; }
     .nav-arrow.next { right: 5px; }
-    .nav-arrow:disabled { opacity: 0.3; cursor: default; }
+    .nav-arrow:disabled { opacity: 0.2; }
 
     .slide-counter {
       position: absolute; top: 10px; right: 20px; font-size: 10px;
-      color: #666; background: rgba(255,255,255,0.5); padding: 2px 6px;
-      border-radius: 8px; z-index: 6;
+      color: #999; background: #f5f5f5; padding: 2px 8px; border-radius: 8px;
     }
 
-    /* ===== COPY BUTTON (Half-in Half-out, Left) ===== */
+    /* COPY BUTTON */
     .copy-btn-half {
-        position: absolute;
-        bottom: -20px; /* Pulls it down 50% */
-        left: 30px;
-        
-        background: #1976d2;
-        color: white;
-        border: none;
-        padding: 10px 24px; /* Standard Size */
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 13px;
-        transition: 0.3s;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        z-index: 10;
+        position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
+        background: #1976d2; color: white; border: none;
+        padding: 9px 28px; border-radius: 50px; font-weight: 600; font-size: 13px;
+        cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 10;
+        white-space: nowrap; transition: 0.2s;
     }
-    .copy-btn-half:hover {
-        background: #0d47a1;
-        transform: translateY(-2px);
-    }
+    .copy-btn-half:active { transform: translateX(-50%) scale(0.95); }
 
-    /* ===== TYPE BUTTON (Circle, INSIDE, Bottom Right) ===== */
-    .type-btn-inside {
-        position: absolute;
-        bottom: 12px; /* MOVED DOWN 3px (15px -> 12px) */
-        right: 20px;
-
-        background: #43a047; /* Green */
-        color: white;
-        border: none;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%; /* Circle */
-        cursor: pointer;
-        font-weight: 700;
-        font-size: 10px;
-        display: flex; justify-content: center; align-items: center;
-        transition: 0.3s;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        text-transform: uppercase; letter-spacing: 0.5px;
-        z-index: 9;
-    }
-    .type-btn-inside:hover {
-        background: #2e7d32;
-        transform: scale(1.1);
-    }
-
-    /* GOOGLE BUTTON */
+    /* ====== ANIMATED GOOGLE BUTTON ====== */
     .google-btn {
-      display: inline-block; margin-top: 10px; border-radius: 8px;
-      text-decoration: none; color: #fff; font-weight: 600; font-size: 15px;
-      padding: 11px 20px;
-      background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
-      background-size: 500% 500%; animation: colorShift 2s infinite alternate;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.25), 0 0 8px rgba(66, 133, 244, 0.3);
-      cursor: pointer; transition: 0.3s; position: relative; z-index: 1;
-    }
-    .google-btn.disabled { cursor: not-allowed; opacity: 0.7; }
-    @keyframes colorShift {
-      0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; }
-    }
-
-    .star-section {
-      margin-top: 35px; text-align: center; color: #000; position: relative; z-index: 1;
-    }
-    .star-section .top-text, .star-section .bottom-text {
-      display: block; font-size: 10px; font-weight: 500;
-    }
-    .stars { font-size: 22px; letter-spacing: 3px; margin: 0; }
-    .thanks {
-      margin-top: 25px; font-size: 32px; font-family: 'Rubik Wet Paint', cursive;
-      color: #000; text-align: center; font-weight: 400; position: relative;
-      z-index: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      display: inline-block; 
+      margin-top: 20px; 
+      border-radius: 50px; 
+      text-decoration: none; 
+      color: #fff; 
+      font-weight: 700; 
+      font-size: 15px;
+      padding: 13px 40px;
+      
+      background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335, #4285F4, #34A853);
+      background-size: 300% 100%; 
+      animation: googleFlow 4s linear infinite; 
+      
+      box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+      cursor: pointer; 
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.5px; position: relative; z-index: 1;
+      opacity: 1; pointer-events: auto; filter: none;
     }
 
-    /* INSTRUCTION POPUP */
-    .instruction-popup {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6); z-index: 2000;
-      justify-content: center; align-items: center;
-    }
-    .instruction-popup.show { display: flex; }
-    .instruction-box {
-      background: white; border-radius: 20px; padding: 30px 25px;
-      max-width: 320px; width: 85%; text-align: left;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3); animation: instructionSlide 0.3s ease-out;
-    }
-    @keyframes instructionSlide { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .instruction-box h3 {
-      font-size: 20px; color: #4285F4; margin-bottom: 20px;
-      text-align: center; font-weight: 700;
-    }
-    .instruction-step {
-      margin-bottom: 18px; padding: 12px; background: #f5f5f5;
-      border-radius: 10px; border-left: 4px solid #4285F4;
-    }
-    .step-number { font-weight: 700; color: #4285F4; font-size: 16px; margin-bottom: 5px; }
-    .step-text { font-size: 14px; color: #333; line-height: 1.5; }
-    .close-instruction {
-      width: 100%; padding: 12px; background: #4285F4; color: white; border: none;
-      border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer;
-      margin-top: 10px; transition: 0.3s;
+    @keyframes googleFlow {
+      0% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    /* STAR ANIMATION OVERLAY */
-    .star-animation-overlay {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      z-index: 3000; justify-content: center; align-items: center;
-      flex-direction: column; animation: slideDown 0.5s ease-out;
+    .google-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(66, 133, 244, 0.5);
     }
-    .star-animation-overlay.show { display: flex; }
-    @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
-    .animation-text {
-      font-size: 24px; color: white; font-weight: 700; margin-bottom: 30px;
-      text-align: center; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    .animated-stars { display: flex; gap: 15px; font-size: 50px; }
-    .animated-star { opacity: 0.3; transition: all 0.5s ease; filter: grayscale(100%); }
-    .animated-star.light { opacity: 1; filter: grayscale(0%); animation: starGlow 0.5s ease; }
-    @keyframes starGlow { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+    
+    /* OTHER UI */
+    .star-section { margin-top: 35px; color: #000; }
+    .stars { font-size: 22px; letter-spacing: 2px; }
+    .thanks { font-family: 'Rubik Wet Paint', cursive; font-size: 26px; margin-top: 20px; }
 
-    /* POPUP OVERLAY */
+    /* ====== SMALL AESTHETIC GENDER POPUP ====== */
+    .gender-popup-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(255, 255, 255, 0.6); 
+        backdrop-filter: blur(12px); 
+        z-index: 5000; 
+        display: flex; justify-content: center; align-items: center;
+        flex-direction: column;
+    }
+    
+    .gender-popup-box {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px 25px; 
+        border-radius: 20px; 
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        text-align: center;
+        width: 80%; max-width: 280px; 
+        border: 1px solid rgba(255,255,255,1);
+        animation: popIn 0.4s ease-out;
+    }
+    
+    @keyframes popIn {
+        from { transform: scale(0.9); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .gender-title { font-size: 18px; color: #222; margin-bottom: 5px; font-weight: 700; }
+    .gender-subtitle { font-size: 12px; color: #777; margin-bottom: 20px; }
+
+    .gender-btn-container { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+
+    .gender-btn {
+        padding: 12px; border: none; border-radius: 12px;
+        font-size: 14px; font-weight: 600; cursor: pointer;
+        transition: transform 0.2s;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .gender-btn.male { background: #f0f7ff; color: #1976d2; border: 1px solid #e3f2fd; }
+    .gender-btn.female { background: #fff0f5; color: #d81b60; border: 1px solid #fce4ec; }
+    .gender-btn:active { transform: scale(0.96); }
+
+    /* POPUP OVERLAY (Copy Alert) */
     .popup-overlay {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.5); z-index: 2000;
@@ -349,124 +235,101 @@
     }
     .popup-overlay.show { display: flex; }
     .popup-box {
-      background: white; border-radius: 15px; padding: 20px; max-width: 280px;
-      width: 80%; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-      animation: popupSlide 0.25s ease-out;
+      background: white; border-radius: 15px; padding: 20px; max-width: 250px;
+      width: 75%; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.25);
     }
-    @keyframes popupSlide { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .popup-message { font-size: 15px; color: #333; font-weight: 600; line-height: 1.4; }
+
   </style>
 </head>
 
 <body>
+
+  <div class="gender-popup-overlay" id="genderPopupOverlay">
+    <div class="gender-popup-box">
+      <div class="gender-title">Welcome</div>
+      <div class="gender-subtitle">Select gender to continue</div>
+      
+      <div class="gender-btn-container">
+        <button class="gender-btn male" onclick="selectGender('male')">
+            <span>👨</span> Male
+        </button>
+        <button class="gender-btn female" onclick="selectGender('female')">
+            <span>👩</span> Female
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="top-banner">
       <span class="banner-text">CityKart</span>
   </div>
 
   <button class="menu-btn" id="menuBtn">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </button>
+
+  <button class="type-btn-fixed" id="typeBtn">Type</button>
 
   <button class="instruction-btn" id="instructionBtn"></button>
 
   <div class="quick-info-box" id="quickInfoBox">
-    <div class="info-step">Step 1: Click on copy text</div>
-    <div class="info-step">Step 2: Click on google review</div>
+    <div class="info-step">Step 1: Copy text</div>
+    <div class="info-step">Step 2: Click Google Review</div>
     <div class="info-step">Step 3: Give 5 star</div>
-    <div class="info-step">Step 4: Paste the review</div>
+    <div class="info-step">Step 4: Paste text</div>
   </div>
 
   <div class="menu-overlay" id="menuOverlay"></div>
-
   <div class="side-menu" id="sideMenu">
     <div class="menu-content">
       <h3>Policy & Information</h3>
-      <p>All reviews are voluntary, and for feedback purposes only.</p>
-      <p>By using this page, you agree that reviews reflect personal experience only.</p>
+      <p>All reviews are voluntary.</p>
+      <p>Reviews reflect personal experience.</p>
       <p>.....................................</p>
-      <p>This is a paid review promotion designed to help both new and established brands strengthen their market visibility and consumer trust.</p>
-      <p>In today's competitive environment, obtaining genuine reviews has become increasingly difficult.</p>
-      <p>We support genuine brands while maintaining honesty, transparency, and fairness for consumers.</p>
-    </div>
-  </div>
-
-  <div class="instruction-popup" id="instructionPopup">
-    <div class="instruction-box">
-      <h3>📋 Detailed Instructions</h3>
-      <div class="instruction-step">
-        <div class="step-number">Step 1:</div>
-        <div class="step-text">Use the arrows to choose a review.</div>
-      </div>
-      <div class="instruction-step">
-        <div class="step-number">Step 2:</div>
-        <div class="step-text">Click "Copy Text"</div>
-      </div>
-      <div class="instruction-step">
-        <div class="step-number">Step 3:</div>
-        <div class="step-text">Click "Google Reviews", give 5 stars, and paste the text.</div>
-      </div>
-      <button class="close-instruction" id="closeInstruction">Got it!</button>
-    </div>
-  </div>
-
-  <div class="star-animation-overlay" id="starAnimationOverlay">
-    <div class="animation-text">Give 5 Stars and Paste the Text</div>
-    <div class="animated-stars">
-      <span class="animated-star">⭐</span>
-      <span class="animated-star">⭐</span>
-      <span class="animated-star">⭐</span>
-      <span class="animated-star">⭐</span>
-      <span class="animated-star">⭐</span>
+      <p>This is a paid review promotion designed to help brands.</p>
     </div>
   </div>
 
   <img src="https://raw.githubusercontent.com/socialinfi321-svgph/komal/main/LOGO-PNG-.png.webp" alt="Logo" class="logo-img">
 
-  <div class="subtitle-container">
-    <div class="subtitle">Contribute Google Review</div>
-  </div>
+  <div class="subtitle">Contribute Google Review</div>
 
   <div class="review-section-wrapper">
       <div class="review-box" id="reviewBox">
-        <div class="slide-counter" id="slideCounter">1/5</div>
+        <div class="slide-counter" id="slideCounter">0/0</div>
         
         <button class="nav-arrow prev" id="prevBtn" disabled>&#10094;</button>
         <button class="nav-arrow next" id="nextBtn">&#10095;</button>
 
         <div class="carousel-track" id="carouselTrack">
           <div class="carousel-slide">
-            <p class="review-text-content">Loading reviews...</p>
+            <p class="loading-text">Loading reviews...</p>
           </div>
         </div>
-
-        <button class="type-btn-inside" id="typeBtn">Type</button>
       </div>
 
       <button class="copy-btn-half" id="copyBtn">Copy Text</button>
   </div>
 
-
-  <a id="googleBtn" class="google-btn disabled">Google Reviews</a>
+  <a id="googleBtn" class="google-btn">Google Reviews</a>
 
   <div class="star-section">
-    <span class="top-text">Only give</span>
+    <span style="font-size: 10px; font-weight: 500;">Only give</span>
     <div class="stars">⭐⭐⭐⭐⭐</div>
-    <span class="bottom-text">May your day not be good but great</span>
+    <span style="font-size: 10px; font-weight: 500;">Have a great day</span>
   </div>
 
   <div class="thanks">Thanks for supporting</div>
 
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup-box">
-      <div class="popup-message">पहले Copy Text बटन पर क्लिक करें</div>
+      <div style="font-size: 14px; color: #333; font-weight: 600;">Please click 'Copy Text' first!</div>
     </div>
   </div>
 
 <script>
-    const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbxmXrp8e5PZf344YG9LXj_lTIzMsvq2wn-Ufi2YE5D7W0_qGzKgRvOT1VfQHw1qCeer/exec';
+    // 🔴 IMPORTANT: Replace with your NEW Web App URL
+    const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwrKgB2zzzQI1rrylAEy_kxbcxRRez56NViXD9vYeiQfvDD0DOe8M514MNTy49-shfl/exec';
 
     const carouselTrack = document.getElementById('carouselTrack');
     const copyBtn = document.getElementById('copyBtn');
@@ -477,149 +340,118 @@
     const sideMenu = document.getElementById('sideMenu');
     const menuOverlay = document.getElementById('menuOverlay');
     const instructionBtn = document.getElementById('instructionBtn');
-    const instructionPopup = document.getElementById('instructionPopup');
-    const closeInstruction = document.getElementById('closeInstruction');
-    const starAnimationOverlay = document.getElementById('starAnimationOverlay');
     const quickInfoBox = document.getElementById('quickInfoBox');
-    
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const slideCounter = document.getElementById('slideCounter');
+    const genderPopup = document.getElementById('genderPopupOverlay');
 
     let reviewData = []; 
     let currentSlide = 0;
     let copyClicked = false;
+    let userGender = null;
 
-    /* Auto-show info box on page load */
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        quickInfoBox.classList.add('show');
-        setTimeout(() => quickInfoBox.classList.remove('show'), 10000);
-      }, 500);
-    });
+    /* GENDER SELECTION LOGIC */
+    function selectGender(gender) {
+        userGender = gender;
+        // Fade out Popup
+        genderPopup.style.transition = 'opacity 0.3s';
+        genderPopup.style.opacity = '0';
+        setTimeout(() => {
+            genderPopup.style.display = 'none';
+        }, 300);
 
-    /* Instruction Button */
-    instructionBtn.addEventListener('click', () => {
-      if (quickInfoBox.classList.contains('show')) {
-        quickInfoBox.classList.remove('show');
-      } else {
-        quickInfoBox.classList.add('show');
-      }
-    });
-
-    closeInstruction.addEventListener('click', () => {
-      instructionPopup.classList.remove('show');
-    });
-
-    instructionPopup.addEventListener('click', (e) => {
-      if (e.target === instructionPopup) instructionPopup.classList.remove('show');
-    });
-
-    /* Menu Toggle */
-    menuBtn.addEventListener('click', () => {
-      sideMenu.classList.add('open');
-      menuOverlay.classList.add('show');
-    });
-
-    menuOverlay.addEventListener('click', () => {
-      sideMenu.classList.remove('open');
-      menuOverlay.classList.remove('show');
-    });
-
-    function showPopup() {
-      popupOverlay.classList.add('show');
-      setTimeout(() => popupOverlay.classList.remove('show'), 2000);
-    }
-
-    /* Star Animation */
-    function showStarAnimation() {
-      starAnimationOverlay.classList.add('show');
-      const stars = document.querySelectorAll('.animated-star');
-      
-      stars.forEach((star, index) => {
-        setTimeout(() => star.classList.add('light'), index * 400);
-      });
-
-      setTimeout(() => {
-        starAnimationOverlay.classList.remove('show');
-        stars.forEach(star => star.classList.remove('light'));
-        window.open('https://reviewthis.biz/9580d9a4', '_blank');
-      }, 3000);
-    }
-
-    /* Function to toggle read more */
-    function toggleReadMore(textId, btn) {
-        const textElement = document.getElementById(textId);
-        textElement.classList.toggle('expanded');
-        if (textElement.classList.contains('expanded')) {
-            btn.innerText = "Show less";
-        } else {
-            btn.innerText = "Read more";
-        }
-    }
-
-
-    /* FETCH 5 REVIEWS LOGIC */
-    async function fetchAllReviews() {
-        const reviewsToFetch = 5;
-        let fetchedCount = 0;
+        // Fetch Reviews
+        fetchAllReviews(gender);
         
-        carouselTrack.innerHTML = '';
+        // Show instruction box briefly
+        setTimeout(() => {
+            quickInfoBox.classList.add('show');
+            setTimeout(() => quickInfoBox.classList.remove('show'), 6000);
+        }, 800);
+    }
+
+    /* === HYBRID FAST FETCHING LOGIC === */
+    async function fetchAllReviews(gender) {
+        carouselTrack.innerHTML = '<div class="carousel-slide"><p class="loading-text">Loading reviews...</p></div>';
+        reviewData = [];
+
+        // --- STEP 1: FETCH ONLY 1 REVIEW (VERY FAST) ---
+        try {
+            // Fetch 1st
+            const response1 = await fetch(`${SHEET_API_URL}?action=reserve&gender=${gender}`);
+            const text1 = await response1.text();
+            let data1;
+            try { data1 = JSON.parse(text1); } catch { data1 = { review: text1, id: null }; }
+
+            if (data1.review) {
+                // Add to array
+                reviewData.push({ id: data1.id, text: data1.review });
+
+                // SHOW IMMEDIATELY
+                carouselTrack.innerHTML = '';
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.innerHTML = `<p class="review-text-content">${data1.review}</p>`;
+                carouselTrack.appendChild(slide);
+
+                updateSlidePosition();
+                updateButtons();
+            }
+        } catch (e) {
+            console.error("1st Review Fetch Error", e);
+        }
+
+        // --- STEP 2: FETCH REMAINING 4 REVIEWS (BACKGROUND) ---
+        const reviewsToFetch = 4;
+        const fetchPromises = [];
 
         for (let i = 0; i < reviewsToFetch; i++) {
-            try {
-                const response = await fetch(SHEET_API_URL + '?action=reserve');
-                const textData = await response.text();
-                
-                let data;
-                try {
-                    data = JSON.parse(textData);
-                } catch {
-                    data = { review: textData.trim(), id: null };
-                }
+            fetchPromises.push(
+                fetch(`${SHEET_API_URL}?action=reserve&gender=${gender}`)
+                .then(res => res.text())
+                .then(text => {
+                    try { return JSON.parse(text); } 
+                    catch { return { review: text, id: null }; }
+                })
+            );
+        }
 
+        try {
+            // Wait for all 4
+            const results = await Promise.all(fetchPromises);
+
+            results.forEach(data => {
                 if (data.review) {
-                    reviewData.push({
-                        id: data.id,
-                        text: data.review
-                    });
-                    
-                    // Create Slide with Read More button
+                    reviewData.push({ id: data.id, text: data.review });
+
+                    // Append to carousel (user won't notice delay now)
                     const slide = document.createElement('div');
                     slide.className = 'carousel-slide';
-                    const textId = `reviewText${i}`;
-                    slide.innerHTML = `
-                        <p class="review-text-content" id="${textId}">${data.review}</p>
-                        <button class="read-more-btn" onclick="toggleReadMore('${textId}', this)">Read more</button>
-                    `;
+                    slide.innerHTML = `<p class="review-text-content">${data.review}</p>`;
                     carouselTrack.appendChild(slide);
                 }
-            } catch (err) {
-                console.error("Error fetching review " + i, err);
-            }
-        }
+            });
 
-        if (reviewData.length === 0) {
-            carouselTrack.innerHTML = '<div class="carousel-slide"><p class="review-text-content">No reviews available. Please reload.</p></div>';
-        } else {
+            // Update counter and buttons
             updateSlidePosition();
             updateButtons();
-            
-            setTimeout(() => {
-                if (!copyClicked) releaseAllReviews();
-            }, 120000);
+
+        } catch (err) {
+            console.error("Background Fetch Error", err);
         }
+
+        // Release reviews on unload
+        window.addEventListener('beforeunload', () => {
+            if (!copyClicked) releaseAllReviews();
+        });
     }
 
     /* CAROUSEL LOGIC */
     function updateSlidePosition() {
+        if(reviewData.length === 0) return;
         carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
         slideCounter.textContent = `${currentSlide + 1}/${reviewData.length}`;
-        
-        const allTexts = document.querySelectorAll('.review-text-content');
-        const allBtns = document.querySelectorAll('.read-more-btn');
-        allTexts.forEach(text => text.classList.remove('expanded'));
-        allBtns.forEach(btn => btn.innerText = "Read more");
     }
 
     function updateButtons() {
@@ -629,58 +461,66 @@
 
     nextBtn.addEventListener('click', () => {
         if (currentSlide < reviewData.length - 1) {
-            currentSlide++;
-            updateSlidePosition();
-            updateButtons();
-            copyBtn.innerText = "Copy Text";
-            copyClicked = false;
+            currentSlide++; updateSlidePosition(); updateButtons();
+            resetCopyState();
         }
     });
 
     prevBtn.addEventListener('click', () => {
         if (currentSlide > 0) {
-            currentSlide--;
-            updateSlidePosition();
-            updateButtons();
-            copyBtn.innerText = "Copy Text";
-            copyClicked = false;
+            currentSlide--; updateSlidePosition(); updateButtons();
+            resetCopyState();
         }
     });
 
-    // Touch Swipe Logic
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    carouselTrack.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-
-    carouselTrack.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    });
-
-    function handleSwipe() {
-        if (touchEndX < touchStartX - 50) {
-            if (currentSlide < reviewData.length - 1) nextBtn.click();
-        }
-        if (touchEndX > touchStartX + 50) {
-            if (currentSlide > 0) prevBtn.click();
-        }
+    function resetCopyState() {
+        copyBtn.innerText = "Copy Text";
+        copyBtn.style.background = "#1976d2";
+        copyClicked = false;
     }
 
-    /* COPY & API LOGIC */
+    /* COPY LOGIC */
     copyBtn.addEventListener("click", async () => {
         if (reviewData.length === 0) return;
-
         const currentText = reviewData[currentSlide].text;
         
-        await navigator.clipboard.writeText(currentText);
-        copyBtn.innerText = "Copied ✓";
-        copyClicked = true;
-        googleBtn.classList.remove('disabled');
+        try {
+            await navigator.clipboard.writeText(currentText);
+            successCopy();
+        } catch (err) {
+            // Fallback for mobile
+            const textarea = document.createElement("textarea");
+            textarea.value = currentText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            successCopy();
+        }
+    });
 
-        setTimeout(() => copyBtn.innerText = "Copy Text", 2000);
+    function successCopy() {
+        copyBtn.innerText = "Copied ✓";
+        copyBtn.style.background = "#43a047";
+        copyClicked = true;
+    }
+
+    /* GOOGLE BUTTON LOGIC */
+    googleBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        if (!copyClicked) {
+            popupOverlay.classList.add('show');
+            setTimeout(() => popupOverlay.classList.remove('show'), 2000);
+            return;
+        }
+
+        const currentId = reviewData[currentSlide].id;
+        if (currentId) {
+            fetch(`${SHEET_API_URL}?action=confirmUsed&id=${currentId}`, { mode: 'no-cors' });
+        }
+
+        window.open('https://reviewthis.biz/9580d9a4', '_blank');
     });
 
     /* TYPE BUTTON LOGIC */
@@ -688,38 +528,19 @@
         window.open('https://reviewthis.biz/9580d9a4', '_blank');
     });
 
-    googleBtn.addEventListener('click', async (e) => {
-        e.preventDefault();
-
-        if (!copyClicked) {
-            showPopup();
-            return;
-        }
-
-        const currentId = reviewData[currentSlide].id;
-        if (currentId) {
-            await fetch(`${SHEET_API_URL}?action=confirmUsed&id=${currentId}`);
-        }
-
-        showStarAnimation();
-    });
-
     async function releaseAllReviews() {
         for (let item of reviewData) {
-           if(item.id) {
-               navigator.sendBeacon(`${SHEET_API_URL}?action=release&id=${item.id}`);
-           }
+           if(item.id) navigator.sendBeacon(`${SHEET_API_URL}?action=release&id=${item.id}`);
         }
     }
 
-    window.addEventListener('beforeunload', () => {
-        if (!copyClicked && reviewData.length > 0) {
-            releaseAllReviews();
-        }
+    /* MENU UI */
+    menuBtn.addEventListener('click', () => { sideMenu.classList.add('open'); menuOverlay.classList.add('show'); });
+    menuOverlay.addEventListener('click', () => { sideMenu.classList.remove('open'); menuOverlay.classList.remove('show'); });
+    instructionBtn.addEventListener('click', () => {
+        quickInfoBox.classList.toggle('show');
     });
 
-    // Start Fetching
-    fetchAllReviews();
 </script>
 
 </body>
