@@ -22,7 +22,8 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background-image: url('https://raw.githubusercontent.com/socialinfi321-svgph/komal/main/1766859886421.jpg');
+      /* Background Image removed as requested */
+      background-color: #f0f0f0; /* Default clean background color */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -41,10 +42,8 @@
       content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.5); pointer-events: none; z-index: 0;
     }
-    body::after {
-      content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); z-index: -1; pointer-events: none;
-    }
+    
+    /* Blur effect (body::after) removed as requested */
 
     /* TOP BANNER */
     .top-banner {
@@ -132,9 +131,10 @@
         box-shadow: none; display: inline-block; position: relative; z-index: 1;
     }
     .subtitle {
-      font-size: 16px; color: #fff !important; margin: 0; font-weight: 800;
+      font-size: 16px; color: #333 !important; /* Changed to dark for visibility since bg is plain */
+      margin: 0; font-weight: 800;
       position: relative; z-index: 1; text-transform: uppercase;
-      letter-spacing: 0.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      letter-spacing: 0.5px; text-shadow: none; /* Removed shadow for plain background */
     }
 
     /* REVIEW SECTION WRAPPER */
@@ -243,7 +243,7 @@
     /* ===== TYPE BUTTON (Circle, INSIDE, Bottom Right) ===== */
     .type-btn-inside {
         position: absolute;
-        bottom: 15px; /* Inside the box padding area */
+        bottom: 12px; /* MOVED DOWN 3px (15px -> 12px) */
         right: 20px;
 
         background: #43a047; /* Green */
@@ -724,4 +724,3 @@
 
 </body>
 </html>
-
